@@ -1,0 +1,356 @@
+Bil-fabiano@hotmail.com
+eu13101985
+O que é middleware (é aplicado nas requisições e respostas) em laravel?
+
+⬤ Configuração do Composer/PHP
+memory_limit = -1 //ESSA CONFIGURAÇÃO É NO PHP.INI
+C:\Users\victor.andrade>composer config -g repo.packagist composer https://packagist.org
+C:\Users\victor.andrade>composer config -g github-protocols https ssh
+
+⬤ Comandos para utilizar no terminal, php e artisan.
+php -S localhost:8000 //Iniciando o servidor.
+cd .. //Voltar para o diretorio anterior a pasta
+cd //Mover entre os diretorios
+dir //Lista os conteúdos dentro do diretorio
+php artisan list //Comandos disponiveis do artisan
+php artisan serve //Um comando melhor para executar o servidor, melhor que php -S localhost:8000
+php artisan serve --port=9000 //Utilizando outra porta para executar o comando, verificar se a porta esta disponivel
+cls //Comando para limpar o historico do cmd do Windows
+php artisan down //Faz o host/servidor ficar em modo de manutenção
+php artisan up //Faz o host/servidor ficar em modo normal, fora da manutenção
+php artisan make:controller PrincipalController //Comando para criar um controle "PrincipalController" é o nome do controlador.
+php artisan route:list //Lista todas as listas que estão sendo usadas.
+
+⬤ Criação de Projeto
+C:\Users\victor.andrade>composer create-project laravel/laravel "nome_do_projeto" "versão"
+C:\Users\victor.andrade>composer create-project laravel/laravel hello_world_first_code
+C:\Users\victor.andrade>composer create-project --prefer-dist laravel/laravel app_super_gestao "7.0.0"
+
+⬤ Routes (Rotas)
+//Routes são as possiveis acessos no nosso site de acordo com a navegação entre nosso site é demonstrado na URL.
+www.site.com/home-page
+www.site.com/my-profile
+www.site.com/about-us
+
+Routes no Laravel: API, Channels, Console, Web. (4 arquivos de rotas no laravel.) //Cada rota dessa é tratada de modo diferente.
+
+web.php // Processando as páginas no lado do back-end e servindo elas, respondendo as requisições. (Permitindo cookies e sessão)
+API.php // Registrar rotas de uma API, responder dados as requisições para o front-end. (Não suporta cookies e nem sessão)
+channels.php // Serve para definição de rotas para comunicação em broadcast. Permite que a aplicação servidora notifique os clientes de atualizações do lado do back-end, permitindo o front-end renderizar as mudanças que foram notificadas pelo servidor
+console.php // Criação de comandos personalizados que serão executados pelo artisan.
+
+Implentação de Rotas, modificações em web.php:
+0.0.0.0:8000/
+0.0.0.0:8000/sobre-nos
+0.0.0.0:8000/contato
+
+Route::get('/', function () { //Rota principal
+    return "Olá, mundo. Seja bem-vindo!";
+});
+Route::get('/sobre-nos', function () { 
+    return "Sobre Nós";
+});
+Route::get('/contato', function () { 
+    return "Contato";
+});
+
+//Route é o objeto que chamamos no método get
+//Verbo HTTP: get, post, put, patch, delete, options. Utilizados para controlar as requisições do servidor. Esses verbos são métodos.
+//Route::get($uri, $callback) //Sempre passaremos a rota ($uri) e a ação que deve ser tomada nessa rota $callback.
+
+⬤ Controladores
+//Ao acessar uma rota, teremos uns controladores e eles podem tomar diversas ações, que são definidas nos controladores. //Routers != Controladores
+//Os metodos/ações dentro dos controladores que vão definir o que a aplicação deve fazer, em função do que foi requisitado para ele através de uma rota.
+//Mesmo que as rotas tenham um callback, o ideal é direcionar as requisições aos controladores.
+//Recomendavel todas as classes de controle terminam com "Controller". SobreNosController/ContatoController
+//Pós criação de controlador, ele fica localizado app>Http>Controllers> Aqui dentro vai ter um novo controlador
+
+<?php
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+class PrincipalController extends Controller
+{
+    public function principal(){
+        echo  "Olá, mundo. Seja bem-vindo!";
+    }
+}
+//Nesse código, é a definição do controlador.
+//public function principal(){} é o método criado, esses métodos são conhecidos como "actions".
+//Os actions seram associados as rotas, a rota chama o controlador e o método dentro desse controlador.
+
+Route::get ("/", " ") //Ao receber uma string no segundo parametro, ele esta identificando que esta recebendo um controlador e uma ação, quando a rota for chamada.
+Route::get("/","PrincipalController@principal"); //No segundo parametro, chamando o controlador "PrincipalController" e a action/método "principal", os dois são separados por @
+
+//Outros exemplos: //Indicando a rota e o controlador@método/action: 
+
+Route::get('/sobre-nos', "SobreNosController@sobreNos");
+Route::get('/contato', "ContatoController@contato");
+//Dessa maneira seria a maneira correta de ser usar rotas, controladores e actions
+
+//VERSÃO 8.0.0 DO LARAVEL:
+Route::get ("/", [\App\Http\Controllers\SobreNosController::class, "sobreNos"]);
+Route::get ("/", [\App\Http\Controllers\ContatoController::class, "contato"]);
+
+⬤ Views
+//São visões que produzimos do lado do servidor para mandar para o cliente que fez a requisição.
+//View nas práticas são páginas HTML processadas no lado do servidor e são enviadas para quem fez a requisição
+//INFORMAÇÃO-IMPORTATE: Separação do front-end e back-end em aplicações distintas, conectadas via API.
+
+//Existem duas técnicas:
+
+1. Técnica tradicional: Construção de views(visualizações) do lado do servidor.
+2. Técnica moderna: Aplicações distintas de front-end e back-end, conectadas pela API. //Se existe uma técnica mais mordena, por que ainda usar a técnica tradicional? Método tradicional também é bom.
+
+//CONHECER BEM AS TÉCNICAS TRADICIONAIS E MODERNAS.
+//Views formam todo o HTML das páginas que vão ser processadas do lado do back-end.
+//Todas as views tem que terminar com ".blade.php", na hora da criação do arquivo. Ex: text.blade.php / site.blade.php
+
+class SobreNosController extends Controller
+{
+    public function sobreNos(){
+        return view("site.sobre-nos");
+    }
+}
+//OBS: Ficar atento as pastas/diretórios e a localização dos arquivos, return view("site.sobre-nos"), estou entrando na pasta "site" e acessando o arquivo sobre-nos.blade.php
+
+⬤ Seguimento de Rotas
+
+//Receber parametros em Route::get.
+Route::get("/contato/{nome}", function(string $xyz){ //Parametro recebido
+    echo "Testando aqui;".$xyz;
+}); //Acessando essa URL: http://127.0.0.1:8000/contato/Casa //Onde "Casa" pode ser qualquer nome.
+
+//Caso queira passar mais de 1 parametro, faça dessa maneira:
+Route::get("/contato/{nome}/{categoria}", function(string $xyz, string $xy){
+    echo "Testando aqui: ".$xyz;
+    
+    echo "<br>Olá como vai: ".$xy;
+});
+
+//Aumente a quantidade de rotas de acordo com a necessidade dos parametros.
+Route::get("/contato/{nome}/{categoria}/{assunto}/{mensagem}", function(string $nome, string $categoria, string $assunto, string $mensagem){
+    echo "Seja bem-vindo: ".$nome.", essa é a categoria ".$categoria." o assunto é sobre o ".$assunto." e a mensagem é ".$mensagem;
+}); //Se você tem uma rota com 2 parametros e nenhuma rota com 1, caso o usuario acesse com 1, irá da erro.
+// OBS: ENVIO DE PARAMETROS EM ROTAS, ISSO ME PARECE IMPORTANTE.
+
+// Caso o parametro não seja recebido para evitar a mensagem de erro:
+Route::get("/contato/{nome}/{categoria}/{assunto}/{mensagem?}", function(string $nome, string $categoria, string $assunto, string $mensagem =  "mensagem não informada"){
+    echo "Seja bem-vindo: ".$nome.", essa é a categoria ".$categoria." o assunto é sobre o ".$assunto." e a mensagem é ".$mensagem;
+}); //Utilize {mensagem?}, essa interrogação e dê valor a rota string mensagem = mensagem de erro
+
+//No seguimento de rota, não podemos deixa o primeiro parametro opcional, pois o Laravel vai se perder, para identificar os parametros.
+//Quando trabalhamos com multiplos parametros dentro do segmento de rota, nós podemos deixar os parametros opcionais desde que sejam passados da direita para a esquerda, não da esquerda para a direita.
+//Se a URL for "http://127.0.0.1:8000/contato/teste" ele mostrará toda as rotas definidas, ou seja, informando 1 parametros todos os outros pré-definidos aparecerão
+
+Route::get("/contato/{nome?}/{categoria?}/{assunto?}/{mensagem?}",
+    function(
+        string $nome = "nome não informado",
+        string $categoria = "categoria nao informada",
+        string $assunto = "assunto nao informado",
+        string $mensagem =  "mensagem não informada"
+    ) {
+    echo "Seja bem-vindo: ".$nome.", essa é a categoria ".$categoria." o assunto é sobre o ".$assunto." e a mensagem é ".$mensagem;
+});
+//Caso não tenha "?" em parametros, eles são parametros obrigatórios.
+
+⬤ Condição na Rota
+//Usamos o método where, para fornecer segurança a nossa aplicação, verificando se os parametros são concistentes ou não são
+Route::get(
+    "/contato/{nome}/{categoria_id}/",
+    function(
+        string $nome = "nome não informado",
+        int $categoria_id = 1 //Categoria de informação
+        //Se passamos um string ao inves de inteiro, da erro!
+    ) {
+    echo "Seja bem-vindo: ".$nome.", essa é a categoria ".$categoria_id;
+})->where("categoria_id","[0-9]+") -> where("nome","[A-Za-z]+"); //Dois parametros a Rota e a Expressão Regular.Para colocamos um limite ou condições, em que o parametro está hábito para ser recebido!
+//Informamos a rota, no primeiro parametro no método where. O segundo parametro é a expressão regular para fazer a condição.
+
+Divisão de rotas páginas para qualuqer pessoa e outras para pessoas administradoras e agrupamento de rotas:
+//Definição de prefixo de rota. Route::prefix(""):
+
+Route::prefix("/app")->group(function(){
+    Route::get('/login', function(){return "Login:";});
+    Route::get('/clientes', function(){return "Clientes:";});
+    Route::get('/fornecedores', function(){return "Fornecedores:";});
+    Route::get('/produtos', function(){return "Produtos:";});
+});//Utilizando o método group definimos todas essas rotas que estão dentro da função de callback, para acessar a URL "/app/login", ao invés de "/login"
+
+⬤ Nomeando as rotas e dando apelidos e depois chamando as rotas, utilização de referência absoluta e não absoluta:
+
+//Nomeando as rotas no método 'name'
+Route::get("/","PrincipalController@principal")->name("site.index");
+Route::get('/sobre-nos', "SobreNosController@sobreNos")->name("site.sobre-nos");
+Route::get('/contato', "ContatoController@contato")->name("site.contato");
+Route::get('/login', function(){return "Login:";})->name("site.login");
+
+Route::prefix("/app")->group(function(){
+    Route::get('/clientes', function(){return "Clientes:";})->name("app.clientes");
+    Route::get('/fornecedores', function(){return "Fornecedores:";})->name("app.fornecedores");
+    Route::get('/produtos', function(){return "Produtos:";})->name("app.produtos");
+});
+//Referências absolutas e não absolutas, utilização do método route(), para referências não absolutas.
+<ul>
+    <li> 
+        <!--Substituição da referência absoluta-->
+        <a href="{{route('site.index')}}">Principal</a> 
+    </li>
+    <li>
+        <!--Referência absoluta-->
+        <a href="/sobre-nos">Sobre Nós</a>
+    </li>
+    <li>
+        <!--Referência não absoluta-->
+        <a href="{{route('site.contato')}}">Contato</a>
+    </li>
+</ul>
+// Utiliza isso é uma vantagem porque, se a rota trocar o nome, ainda temos o apelido e não mudará o código completamente. Ou seja, não temos uma depedência absoluta.
+
+⬤ Redirecionamento de rotas:
+Route::get("/rota1", function(){
+    echo "Rota 1";
+})->name("site.rota1");
+
+Route::get("/rota2", function(){
+    //Método 1 de redirecionamento
+    return redirect()->route("site.rota1"); //Pode ser colocado dentro de um controlador para que seja a forma mais adequada de usar.
+})->name("site.rota2");
+
+//Método 2
+Route::redirect("/rota2", "/rota1"); //Redirecionamento de rota usando o método redirect do objeto Route
+
+Rota de Fallback: //Rota usada para caso que o cliente tente acessar uma rota que não existe no momento no site. sendo redirecionado para a outra rota.
+Route::fallback(function(){
+    echo "A rota acessada não existe, <a href=".route('site.index').">clique aqui para ir para a página inicial</a>";
+});
+
+Encaminhamento de parametros da rota para o controlador: //É importante seguir a ordem dos parametros das rotas. Exemplo:
+Route::get("/teste/{p1}/{p2}", "TesteController@teste")->name("teste");
+{
+    public function teste(int $p1, int $p2){ //Controlador recebendo os parametros
+        echo "A soma de $p1 + $p2 = ". ($p1+$p2);
+    }
+}
+
+⬤ Enviar passagem de parametros do controlador para uma view:
+//3 MÉTODOS PARA ENVIO DE PARAMETRO DE CONTROLADOR PARA VIEW "Array associativo, Compact(), With()"
+//MÉTODO DE ARRAY ASSOCIATIVO
+
+    //ISSO AQUI ESTÁ ACONTECENDO NO CONTROLADOR.
+    public function teste(int $p1, int $p2){
+        //echo "A soma de $p1 + $p2 = ". ($p1+$p2);
+        return view("site.teste", ["x" => $p1, y => $p2]); //Método de Array Associativo //Os indices x, y viraram uma váriavel nesse contexto
+    }
+    //ISSO AQUI ESTÁ ACONTECENDO NA VIEW
+<h3>teste</h3>
+{{$x}} // O X GUARDOU O VALOR DE $p1. Virou uma váriavel  
+{{$y}} // O Y GUARDOU O VALOR DE $p2. Virou uma váriavel
+
+//Método do Compact //Utilizaremos muito o método compact
+
+return view('site.teste', compact("p1", "p2"));//Passamos o nome das váriaveis ou seja p1 ou p2, porém sem $
+P1 = {{$p1}}
+<br>
+P2 = {{$p2}}
+<br>
+TOTAL = P1 + P2 = {{$p1}}
+
+//Método With
+return view('site.teste')->with('x1', $p1)->with('x2', $p2);
+P1 = {{$x1}}
+<br>
+P2 = {{$x2}}
+<br>
+TOTAL = P1 + P2
+
+⬤ Blade é o motor de renderização de views do Laravel.
+//Views modificam ou estendem outras views.
+//Detalhe interessante, o blade ele não impede o uso da sintaxe do php, podemos usar a sintaxe blade e a sintaxe php
+
+//COMENTÁRIOS EM {{-- ISSO É UM COMENTÁRIO --}}
+@php
+//Sintaxe de PHP dentro de blade.php
+// isso é um comentário em php  
+    echo "teste";
+@endphp
+
+//Podemos passar para uma view, uma váriavel como segundo parametro do método view, utilizando o compact()
+    public function index(){
+        $fornecedores = ['Fornecedor 1', 'Fornecedor 2', "Fornecedor 3", "Fornecedor 4"];
+        return view('app.fornecedor.index', compact("fornecedores"));
+    }
+//Não funciona dessa forma {{$fornecedores}}
+//Funciona dessa forma, pois é um vetor @dd($fornecedores)
+
+//Os comandos da sintaxe blade são comandos que vão ser convertidos para sintaxe php
+
+⬤ Sintaxe do Blade: @if, @elseif, @else
+@dd($fornecedores)
+
+@if(count($fornecedores) > 0 && count($fornecedores) < 10)
+    <h3> Existem alguns fornecedores cadastrados </h3>
+@elseif(count($fornecedores) > 10)
+    <h3> Existem vários fornecedores cadastrados </h3>
+@else
+    <h3> Ainda não existem alguns fornecedores cadastrados </h3>
+@endif
+⬤ Observe o código blade:
+1.  Route::get('/fornecedores', "FornecedorController@index")->name("app.fornecedores"); // Determinado a rota, controlador e a ação e depois demos um nome
+2. class FornecedorController extends Controller //Esse é o controlador a parte mais interessante é a onde está localizado a view, dentro de app/fornecedor/ e o método compact que transforma a váriavel que tem o mesmo nome ou seja $fornecedores = compact("fornecedores")
+// Caso o nome seja diferente, não funciona, somente se o nome for igual.
+{
+    public function index(){
+        $fornecedores = ['Fornecedor 1',
+        'Fornecedor 2',
+        "Fornecedor 3",
+        "Fornecedor 4",
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2',
+        'Fornecedor 2'];
+        return view('app.fornecedor.index', compact("fornecedores"));
+    }
+}
+
+//Outra coisa
+$fornecedores = [
+	0 => ["nome" => "fornecedor 1", "status"=>"N"]
+]; //Significa que o fornecedor é um vetor, nesse vetor. Temos 1 array, ou seja o 0, podemos indicar a posição independente. Nesse array 0, temos o nome e status e indicando o valor deles
+
+Fornecedor: {{$fornecedores[0]["nome"]}}
+Status: {{$fornecedores[0]["status"]}} //Estamos no arquivo blade.php e vamos buscar o vetor, que foi definido no controlador, com método compact(). Pós, isso  puxamos no arquivo blade, dessa forma.
+
+⬤ @unless: Ele faz o inverso do que o if. Executa se o retorno for falso
+//Basicamente, utilizamos unless, para diminuir a quantidade de código.
+
+@if(!($fornecedores[0]["status"] == "S"))
+    Fornecedor Inativo
+@endif
+//Basicamente esse @if e @endif, são a mesma coisa que esse @unless embaixo.
+
+@unless($fornecedores[0]["status"] == "S") {{-- Executa se o retorno da condição for falso --}}
+    Fornecedor Inativo
+@endunless
+
+⬤ @isset verifica se a váriavel existe ou não, não se preocupando com o valor. Se verificar se a variavel existe antes, ela não da erro, mesmo se ela não existir
+⬤ @empty verifica se a váriavel/array se estão vazios
+⬤ EM PHP FUNCIONA DE FORMA SEMELHANTE
+@php
+    if(empty())
+    if(isset())
+@endphp
+
+//Entender melhor esse empty()
+⬤ Operador ternário
+se verdade? faça: senão

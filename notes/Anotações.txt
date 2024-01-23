@@ -1,0 +1,434 @@
+Isso aqui é importante: //Faz uma redução de código nas views, esses 3 métodos.
+@extends('') //Vai direto para o diretório views, dentro de resources. ('Aqui você deverá selecionar para qual o arquivo está sendo direcionado')
+Extends é utilizado para estender o layouts pai, permitindo a criação de uma página consistente e reutilizavel
+
+@section('') //Todo o bloco selecionado será enviado para o template. ('Aqui deve ser o nome do conteúdo') @endsection //Finalizando o bloco
+Section é a definição de uma seção que deve ser empurrada para o template.
+
+@yield('') //Dentro do documento da template, especificamente no body. ('Aqui ficará a seção que você quer o conteúdo fique a mostrar no template')
+Yield fica dentro do template, no body. Funcionando para pegar o conteúdo da seção e passar para o template.
+
+Após essas alterações pode-se perceber um erro, que em todas as abas o titulo delas são os mesmos. Para resolver:
+<title>@yield('')</title> //Dentro da sua template, escreva @yield('Apresentar o respectivo valor')
+Ex de uso:
+<title>@yield('titulo_das_paginas')</title> //Isso ocorre dentro da template, na parte do head.
+@section('titulo_das_paginas','Contato') //Isso ocorre dentro da view. Não a necessidade de usar um @endsection.
+//Você está selecionando o valor apresentado em @yield('titulo_das_pagians') e selecionado para @section, Apresentando o valor e o titulo da página.
+
+Dica Extra:
+@section('titulo_das_paginas', $titulo) //Podemos encaminhar, não apenas string, mas também parametros e controladores.
+//Definindo uma váriavel $titulo, podemos utilizar os 3 métodos de passagem de valor. Compact(), Array Associativo, Método With.
+    return view('site.contato',['titulo' => "Contato (teste)"]); //Utilizando o método Array Associativo
+//'titulo' indicando o nome da váriavel $titulo, => indicando o valor da váriavel.
+//Isso é parecido com POO, Programa Orientado ao Objeto.
+
+@include('') //Acessar diretamente a pasta views. Funcionar para podemos diminuir a quantidade de código, colocando em outro arquivo o código e no principal, buscando ele.
+//Se estivermos em um programa principal, pegamos o pedaço do código e colocamos em outro arquivo. Chamarmos ele onde estivermos
+No programa principal:
+@include('site.layouts.parts.topo') //Dentro do diretório view, indicando as pastas site, layouts, parts e o arquivo topo
+//No programa onde está o código ou seja, no arquivo "topo". Ficaria o código
+<h1>Olá</h1>
+
+Dica Extra:
+//Podemos colocar em um template, assim não necessariamente tendo que criar um @include para cada, view. Pois, dentro do template ja esta a configuração do site.
+
+Método POST x Método GET (Ambos métodos do verbo HTTP)
+
+@csrf (Cross-Site Request Forgery) ou (Fasificação de solicitações entre sites) //Cross-site é uma aplicação que aproveita a vulnerabilidade do servidor para clonagem de dados ou transações, aparentando para o site realmente ser o cliente, porém é uma aplicação de roubo de dados
+//É um token do método POST
+
+@componet('')//O componente começa a partir do diretório views. Indicando a abertura de um componente. @endcomponent //Indicando o fim do componente
+//Ex: @component('site.layouts._components.form_contato') @endcomponent //Acessando as pastas site, layouts, _componets e o arquivo form_contato
+//O que é um componente?
+R: Um componente é uma view normal, a unica diferença é que é uma view dentro de outra view.
+
+@component('site.layouts._components.form_contato')
+//Enviando parametros da views, para os components
+<p> Retornaremos com uma mensagem o mais rápido possivel! </p> 
+//A mensagem que está aqui dentro do @component e @endcomponet é uma mensagem que será adicionada, mas ela é armazenada em uma váriavel $slot.
+//Ou seja, a mensagem só aparecerar quando for chamado no componente. {{$slot}}
+@endcomponent
+
+//Outra forma de enviar parametros das views, para os components
+@component('site.layouts._components.form_contato',['x' => 10])
+//Utilizando esse Array Associativo, fazemos a váriavel x, com o valor de 10. Assim dessa forma podemos chamar o x dentro da view. {{x}}
+@endcomponent
+
+//Podemos passar a classe por parametro para mudarmos o estilo da página.
+@component('site.layouts._components.form_contato',['classe' => 'borda-preta']) @endcomponent //Isso está em uma pagina 'Pagína Principal'
+@component('site.layouts._components.form_contato',['classe' => 'borda-branca']) @endcomponent //Isso está em outra página 'Pagína Contato'
+//Agora se formos em uma tag HTML e modificarmos. Ex:
+Não modificados:
+<input name="nome" type="text" placeholder="Nome" class="{{borda-preta}}"> //Tudo em uma página
+<input name="nome" type="text" placeholder="Nome" class="{{borda-preta}}"> //Tudo em uma página
+Modificados: //Após a modificação cada página tendo o seu parametro passado via @components, como a página principal e contato, cada uma mantem seu estilo, não necessariamente sendo borda-preta para todos.
+<input name="nome" type="text" placeholder="Nome" class="{{$classe}}">
+<input name="nome" type="text" placeholder="Nome" class="{{$classe}}">
+
+Evitar compatibilidade entre versões de PHP, utilize o comando 'composer install'
+Resolvendo um problema de keys, estava dando o error '505 Error Server', terá um arquivo '.env.example' mude para '.env', pós isso utilize o comando:
+php artisan key:generate //Isso fará gerar uma chave/token da aplicação.
+
+Criação de Modelo, com uma criação de migration.
+php artisan make:model Contato -m //Onde o Contato é o nome do model criado e o parametro -m é a migration.
+php artisan make:migration create_fornecedores_table //Criação de migração fora do modelo. //Nomeação de uma migrate
+php artisan migration:refresh //Apaga todas as migrações e refaz.
+
+O que é uma migration?
+R: Uma migration permite a modelagem do banco de dados no próprio PHP, não precisando utilizar o SQL.
+php artisan migrate //Comando de executar as migrations
+
+Dicas para comandos em banco de dados.
+//Caso o banco de dados esteja desabilitado, clique duas vezes em cima, ou escreva a linha de comando use sg.
+select * from migrations; //Para mostrar as migrações, ou select * from sg.migrations;
+
+//FK é Foreignkey ou chave estrangueira em banco de dados.
+//Apagar uma foreign $table->dropForeign('<table>_<coluna>_<foreign>') //Padrão para fazer o drop. //Ex: $table->dropForeign('site_contatos_motivo_contato_id_foreign');
+
+Para acessar os comandos de migration, vá https://laravel.com > Documentation > Databases > migration
+$table->string("nome", 50); //Aqui estamos criando uma coluna tipo string, com o nome de "nome" e a quantidade/tamanho.
+$table->integer('motivo_de_contato'); //Aqui estamos criando uma coluna tipo integer, com o nome "motivo_de_contato".
+$table->text('mensagem'); //Nessa coluna é um tipo text, texto grande.
+$table->float('altura', 8, 2); //8 digitos e 2 para a fração.
+
+Dica: Dentro do Workbench MySQL, o batch significa o lote de quado foi executado, ou seja, quais foram executadas antes e outras depois.s
+
+Configuração do SQLITE, vá no diretório database e crie um arquivo chamado database.sqlite //No arquivo de configuração .env, apague essa linha de código DB_DATABASE=laravel
+php artisan migrate //Esse comando vai executar todas as migrações criadas.
+
+Senha do MySQL: 123456@Pms
+
+//Comandos para decorar do MySQL.
+CREATE USER 'victor'@'%' IDENTIFIED BY 'Pms@123456';
+GRANT ALL PRIVILEGES ON * . * TO 'victor'@'%';
+
+//Dicas para migrations
+Schema //É um objeto que consegue manipular o banco de dados diretamente do código
+create //É um método que consegue criar tabelas diretamente no banco de dados com do código
+table //É um método que ja seleciona uma tabela criada no banco para algumas funções, que serão retornadas.
+
+//Dentro da migração temos dois métodos o up() e o down()
+Método up(), tudo que estiver dentro dele será executado ao digitar o comando 'php artisan migrate'.
+//O comando 'php artisan migrate', executamos do mais antigo para o mais atual.
+
+Método down(), ele é usado para reverter tudo aquilo que aconteceu, no método up(). Ou seja, ele desfaz o que o método up() faz.
+//O comando 'php artisan migrate:rollback' executamos da mais atual para a mais antiga. //Podemos determinar a quantidade de passos de rollback queremos dar.
+//Determinando a quantidade de passo: php artisan migrate:rollback --step=2
+
+//Comandos para utilizar no método down()
+$table->dropColumn('uf'); //Apaga uma tabela
+$table->dropColumn(['uf','email']); //Apagar várias tabelas de uma vez
+$Schema::dropIfExists('fornecedores') //Se a tabela existir, apaga!
+$Schema::drop('fornecedores') //Apaga a tabela, sem ver se existe.
+DB::table('tabela_y')->delete(); //Apagar a coluna da tabela. //Esse comando está fora do curso
+
+//Toda logica das migrações temos a implentação e a reversão.
+
+Para não deixar os valores nulos ou deixar os valores com algum valor:
+$table->text('descricao')->nullable(); //'->nullable();' Pode ser nulo
+$table->flaot('preco_venda', 8, 2)->default(0.01); //'default->(0.01) 'Se o valor não for passado para o banco de dados, o valor será 0.01
+//Detalhe importante: O valor passado tem que ser de acordo com o tipo da váriavel.
+
+Relacionamento de um para um entre tabelas.
+//Para o relacionamento de 1 para 1, a chave primaria de uma tabela vá para a outra tabela, a chave tem que ser recebida como chave estrangeira
+Dica: Quando usarmos o ID de outra tabela, pegamos o nome da tabela + 'id' no singular ou seja: produtos = produto_id, casas = casa_id
+//Fundamental que a coluna da tabela que vai receber a chave estrangueira tenho o mesmo tipo da chave primária.
+//Adicionando uma constraint, ou pegando uma chave de uma tabela estrangueira e colocando na primária.
+//constraint são as regras que são adicionadas na tabela. ex '$atble->string('nome')->unique();
+$table->foreign('produto_id')->reference('id')->on('produtos'); //No caso 'produto_id' é a nossa coluna que vai referência a coluna 'id' da tabela 'produtos'. //Assim fazendo o relacionamento
+//E para garantir um relacionamento de 1 para 1. Utilize $table->unique('produto_id');
+
+Modificador de coluna 'After' em um tabela, permite uma nova coluna seja inserida, uma nova coluna pode ser criada após uma coluna que existe.
+//As colunas de banco de dados são sempre colocadas a direita da tabela, indicando o final da tabela.
+//Comando de banco de dados para exibir as colunas 'describe nome_da_tabela;    ' ou 'select * from nome_da_tabela;'.
+Utilização do comando after, significado de depois: $table->string('site', 150)->after('nome')->nullable(); //nullable é um extra.
+
+Alguns comandos de migrações para utilizar diretamente no código:
+php artisan migrate:status //Mostrar as listas de migrações que temos atualmente.
+php artisan migrate:reset // Ele vai fazer o método down da mais nova para a mais antiga. Não recriar as migrações
+php artisan migrate:refresh //Executa o rollback de todas as migrations + migrate para recriar os objetos
+php artisan migrate:fresh //Faz o drop de todos os objetos do banco de dados + o migrate para recriar os objetos
+
+Questões relacionadas a create table e alter table.
+//create table é a criação de uma tabela nova com colunas.
+//alter table é a alteração de alguma coluna já existente em outra tabela
+
+Eloquent ORM (Mapeameneto Objeto Relacional) é uma técnica para aproximar o paradigma de desenvolvimento de aplicações orientadas ao objeto com um bando de dados relacionais.
+//Mostrar como serão mapeados os dados serão mapeados entre os dois ambientes, oferecendo recursos para ajudar e diminuir o tempo de desenvolvimento.
+//ORM é um método independente de linguagem de programação. Dois padraões bem populares no mercado de ORM: Datta Mapper, Active Record.
+
+//Inserção de dados no banco de dados.
+Tinker é uma ferramenta nativa do laravel, é um console interativo que possibilita o acesso as classes do projeto através da linha de comando.
+//No tinker podemos manipular as classes relativas aos models, instanciando as classes e executar os métodos e podemos testar o mapeamento ao objeto relacional.
+//Comando para sua utilização 'php artisan tinker', esse comando da entrada na ferramenta tinker.
+//Em um ambiente sem tinker, teremos que acessar a aplicação diretamente. //O que fazemos no Tinker, será aplicado nos controladores
+
+//Criando um objeto no Model, através da utilização do Tinker. '$contato = new \App\SiteContato();'
+//Esses objetos tem nomes identicos de acordo com o banco de dados, são criados para o qual o model faz referência.
+//Ou seja, Objetos do tipo SiteContato, sejam armazenadas no banco de dados de acordo com a tabela que está sendo referenciada. SiteContato e site_contato
+//Dando um valor dentro do objeto contato, no atributo nome do objeto contato. '$contato->nome = 'Jorge';' //Nome vai receber Jorge
+//Criamos um objeto primeiro e depois damos valores aos atributos. Os atributos estão localizados no banco de dados de acordo com as colunas.
+
+//Comando dentro do Tinker para verificar os atributos que foram dados para devido objeto. 'print_r($contato->getAttributes());'
+//Para o objeto persistir no banco utilize esse comando. '$contato->save();' //Se não usarmos esse comando pós alteração de atributos no tinker, os dados não seram salvos no banco de dados.
+
+//Mostrar os dados salvos na coluna de uma tabela. 'select * from site_contatos;'
+
+//Tem uma certa regra do laravel em que nos models, a criação de nomes de models, fica errada em questão de sintaxe de português.
+//Ex: Fornecedor = Fornecedors (não é Fornecedores) //Desse modo podemos resolver utilizando o 'protected $table = 'fornecedores';' Assim desse modo se o Eloquent do Laravel, não conseguir chegar com o nome anterior definido, podemos usar essa linha de comando 'protected $table'
+
+Utilizando o 'create' e o 'fillable', para adicionar dados a tabela. Utilizando método de array associativo \App\Fornecedor::create(['nome'=>'Fornecedor ABC', 'site'=>'fornecedorabc.com.br','uf'=>'SP','email'=>'contato@fornecedorabc.com.br']); //Pode ser 'Fornecedor::create(['nome' => 'Fornecedor 1', 'site' => 'fornecedor1.com.br', 'uf'=> 'SP', 'email' => 'contato@fornecedor1.com.br'])'
+//$fillable é um atributo protected
+//Ao colocar $fillable no seu model, podemos modificar colunas ou adicionar dados nessas colunas em massa e permite a manipulação de dados via migration.
+//Caso aconteça algum erro, fecha o tinker e abra novamente. Através do fillable ele autorizou o método create, preenche-se os atributos passados ao objeto. Também podemos fazer algumas limitações.
+
+use \App\Fornecedor; //Trazendo a classe Fornecedor para o contexto do tinker.
+$fornecedores = Fornecedor::all(); //Mostrando todos os registros da model Fornecedor. Recuperando as tabelas que foram determinadas para um determinado Model e guardando os valores em uma váriavel.
+print_r($fornecedores->toArray()); //Vai mostrar os dados na tela de forma como um vetor. Utilizando o método toArray();
+foreach($fornecedores as $f) {echo $f->nome; echo ' - ';} //$f está recebendo os atributos de $fornecedores e mostrando um atributo de $f, no caso o nome. Mostrando os os nomes de cada um dos objetos contindos na tabela fornecedores.
+//Se por acaso gerar um builder, utilize o nome $nome_variavel->get();
+
+//Se após a utilização dos métodos gerar um build ou você usa o ->get(); no final, ou pós não usar. Utilize o nome da variavel que escreveu a linha de comando e depois utilize o get. Ex: $casa->get(); $rua->get();
+Método 'find'
+//Semelhante ao método 'all', porém ele pega necessita do parametro da chave primaria (primary key). Diferente do método 'all' o método 'all' mostrar todos os objetos sem a necessidade de ter um parametro.
+//Retorna somente os objetos especificados dentro do parametro. 
+$fornecedores = Fornecedor::find(1); //Mostrando a tabela.
+$fornecedores = Fornecedor::find([1,2]); //Mostrando a tabela 1 e 2.
+echo $fornecedores->nome; //Isso aqui mostrar dentro do array fornecedores e mostrando o atributo nome.
+foreach($fornecedores as $fornecedores2) {echo $f->nome; echo ' - ';}
+
+Método 'where'
+//É um construtor, permitindo que diversos outros métodos podem ser utilizados em conjunto para pesquisar os registro de diversas formas.
+//No banco de dados SQL Workbench (Anotações) /* where (comparação) operadores lógicos (comparação)*/ //Podemos fazer diversas comparações.
+//Comparadores principais: > >= < <= <> like ('like'. Esse operador procura por algo parecido. Ex: '$contatos = SiteContato::where('mensagem','like','%detalhes')->get();' //Assim buscando por palavras 'detalhes' e indicando que a esquerda pode ter qualquer valor.)  //No caso do like temos os caracteres coringas então não seria 'detalhes' seria '%detalhes'
+//%detalhes indicando strings que terminam com detalhes. detalhes% indicando strings que começam com detalhes. %detalhes% não ligando para as coisas a esquerda e a direta em detalhes.
+//Exemplo: $exemplo = nome_do_Model::where('nome_da_coluna', 'operador_comparação','valor'); //$contatos = SiteContato::where('id' , '>' , 1); //Pós uso ele retornar um builder, que significa que estamos criando uma consulta. //Para a consulta retornar uma collection utilizamos o ->get(); //Collection retorna os atributos da tabela.
+//Alguns exemplos, para utilizar o where: 
+$contatos = SiteContato::where('numero' , '>' , 1)->get(); //Chave primaria maior que 1, mostrar todas
+$contatos = SiteContato::where('motivo_de_contato', '==', 1)->get(); //Motivo de contato for igual 1, mostrar todos. //Podemos utilizar o '==' da mesma forma $contatos = SiteContato::where('motivo_de_contato', 1)->get();
+
+Método 'whereIn'
+//Utiliza a operação de igualdade.
+//Podemos usar esse método para vários tipos primitivos.
+//Ele é bom pois ele tem um filtro de busca bem especifico em um conjunto de parametros.
+//Modo de uso '$contatos = SiteContato::whereIn('campo_a_ser_comparado_por_igual','conjunto_de_parametros');' //$contatos = SiteContato::whereIn('motivo_contato','conjunto_de_parametros',[1,3])->get(); //Procurando os 'motivo_contato' seja 1 ou 3
+
+Método 'whereNotIn'
+//Esse método faz o contrario de 'whereIn', 'whereIn' faz a comparação de igualdade, 'whereNotIn' faz a comparação de desigualdade.
+//Modo de uso $contatos = SiteContato::whereNotIn('motivo_contato', [1,3])->get(); //Dessa forma ele verifica se tem diferente de 1, 3. Ou seja, mostrar as collection sem ser 1 ou 3.
+$contatos = SiteContato::whereIn('motivo_contato',[1,2,3]);
+
+Método 'whereBetween' //Pode ser usado para valores numéricos ou datas
+//Modo de uso '$contatos = SiteContato::whereBetween('numero', [3,6])->get();' //Pega determinada coluna da tabela e verifica de onde a onde vai, 'numero' é uma coluna e verifica se o 'numero' vai de [3 a 6], as informações que forem de 3,4,5,6 vão ser imprimidos.
+
+Método 'whereNotBetween' //Pode ser usado para valores numéricos ou datas
+//Modo de uso '$contatos = SiteContato::whereNotBetween('numero', [3,6])->get(); //Faz o contrario do 'whereBetween' ou seja vai imprimir tudo que está fora desse meio. sendo assim tudo que não estiver entre 3 a 6, vai ser imprimido.
+
+//Dentro do workbench: select * from site_contatos where nome <> 'Fernando' and motivo_contato in(1,2) and created_at between '2023-08-01 00:00:00' and '2023-12-31 23:59:59';
+//Esse código significa que não queremos o 'Fernando' e o motivo tem que ser 1 e 2, e a data criada tem que ser de 1 do 8 de 2023 até 31 do 12 de 2023.
+//Dentro do tinker: $contatos = SiteContato::where('nome','<>','Fernando')->whereIn('motivo_contato', [1,2])->whereBetween('created_at', ['2023-08-01 00:00:00', '2023-12-31 23:59:59'])->get();
+//As linhas de código são as mesmas coisas, mas utilizadas em diferentes programas um em workbench e outro em um compilador de código.
+
+Método 'orWhere' //Utilizado para ser ou para todos orWhereIn, orWhereNotIn, orWhereBetween, orWhereNotBetween.
+//Utilizado no programa: $contatos = SiteContato::where('nome', '<>' , 'Fernando')->orWhereIn('motivo_contato', [1,2])->orWhereBetween('created_at', ['2023-08-01 00:00:00', '2023-12-31 23:59:59'])->get();
+//Utilizado no Workbench: select * from site_contatos where nome <> 'Fernando' or motivo_contato in(1,2) or created_at between '2023-08-01 00:00:00' and '2023-12-31 23:59:59';
+//where()->where() == and
+
+Método 'whereNotNull' e 'whereNull'
+//$contatos = SiteContato::whereNotNull('updated_at') // Mostrando as tabelas onde não tem valores nulos.
+//$contatos = SiteContato::whereNull('updated_at') // Mostrando as tabelas onde tem valores nulos.
+
+Método 'whereDate', 'whereDay', 'whereMonth', 'whereTime' //Respectivamente, utilizado para buscar especificamente pela data, dia, mês e hora.
+$contatos = SiteContato::whereDate('created_at', '2023-09-15')->get(); //Exemplo para data.
+$contatos = SiteContato::whereDay('created_at', '15')->get(); //Exemplo para o dia.
+$contatos = SiteContato::whereMonth('created_at', '09')->get(); //Exemplo para o mês.
+$contatos = SiteContato::whereYear('created_at', '2023')->get(); //Exemplo para o ano.
+//Juntando algumas informações: $contatos = SiteContato::whereDay('created_at', '15')->whereYear('created_at', '2023')->get(); //Dessa forma eu to buscando os dados que foram criados do dia 15 e o ano de criação de 2023 
+$contatos = SiteContato::whereTime('created_at', '=', '22:31:17')->get(); //Exemplo para o horário.
+
+$contatos = SiteContato::whereColumn('created_at', 'updated_at')->get(); //Não especificando a operação, sempre será '=' igualdade, está comparando se as colunas são iguais se sim, traz elas.
+
+Linha de código no WORKBENCH: select * from site_contatos where (nome = 'Jorge' or nome = 'Ana') and (motivo_contato in (1,2) or numero between 4 and 6)
+Linha de código no Tinker: where('nome','Jorge')->orWhere('nome' ,'Ana')->whereIn('motivo_contato', [1,2])->orWhereBetWeen('numero', [4,6])
+ 
+$contatos = SiteContato::where(function($query){$query->where('nome', 'Jorge')->orWhere('nome', 'Ana');})->where(function($query){$query->whereIn('motivo_contato', [1,2])->orWhereBetWeen('numero', [4,6]);})->get(); //Criar sub-grupos de consultas, podemos ter vários sub-grupos e dentro dos sub-grupos podemos ter sub-grupos.
+
+Método 'orderBy' //Método feito para trazer em ordem ascendente e descendente.
+$contatos = SiteContato::orderBy('nome')->get(); //Trazendo de forma ascendente, não é necessário passar o segundo parametro.
+$contatos = SiteContato::orderBy('nome','asc')->get(); //Trazendo de forma ascendente, especificando o parametro, mas não é necessario.
+$contatos = SiteContato::orderBy('nome','desc')->get(); //Trazendo de forma descendente.
+
+Diferenças entre builds e collections
+//Temos umas diferenças entre builders e collections.
+//Criando uma builder: $contatos = SiteContatos::where('id','>',3); //Esses objetos são feitos para construir a nossa query
+//Criando uma collection ou executando: $contatos = SiteContatos::where('id','>',3)->get(); //Esses objetos são feitos para iniciar a nossa query. //Collection é um array de objetos
+
+Método 'first' retornar para nós o identificador do primeiro elemento  '$contatos = SiteContato::first('numero', '>', 3)->get();'
+Método 'last' faz o contrário do método 'first'. Método 'reverse' inverte a ordem dos elemenetos, fazendo mostrar ela do lado reverso.
+
+Método 'toArray' converter os objetos dentro da collection para um array. Método 'toJson' converter os objetos da collection para um arquivo .json
+SiteContato::all()->toArray(); //Cpmverter para Array. SiteContato::all()->toJson(); //Converter para Json.
+
+Dica para usar: SiteContato::all(); //SitaContato o nome da model e all o método, usando esse comando diretamente no tinker ela retornar uma collection.
+
+Método 'pluck' //Retornar uma chave de todos os elementos da coleção.
+SiteContato:all()->pluck('email'); //Retornar todos os valores do email.
+SiteContato:all()->pluck('email','nome'); //Podemos criar um segundo parametro para criar um array associativo para acesso ao valor.
+
+Método 'fill' //Importante manter configurado o $fillable para podemos acessar com o método fill.
+//Esse método parece com $fornecedor->nome = 'Victor'; e  $fornecedor->idade = 17;
+//Ele vem para facilita. Ex: $fornecedor->fill(['nome'=> 'Victor, 'idade'=> 17])
+//Podemos mudar várias valores ou atributos em um array associativo
+//Necessário deixar configurado o $fillable.
+//Preencher os atributos do array associativo.
+
+Método 'update' //Atualizar sem que seja necessário utilizar o método save();
+//Um exemplo da utilização do update com umas condições.
+Fornecedor::whereIn('id', [1,2])->update(['nome' => 'Fornecedor Teste', 'site' => 'teste.com.br']); //Esse exemplo pega a tabela 'Fornecedor', e dentro do 'whereIn', ele busca a condição que tenha o 'id' de 1 até 2, se for verdade o 'nome' e o 'site' dessas tabelas são mudados.
+//Utiliza array associativo, podendo mudar 1 ou vários valores.
+
+Método 'delete' //Apagar uma váriavel
+$nome_variavel->delete(); //Adiciona uma data de remoção, não remove na hora. Para remover na hora $nome_da_variavel->forceDelete();
+//Podemos especificar uma linha também. SiteContato::where('id', 7)->delete(); //Apagando a linha 7 e identificando o id.
+//Outra forma SiteContato::destroy(5); //Apagando diretamente a linha 5.
+
+Implementação do SoftDelete
+//Primeiro temos que colocar no contexto do nosso model. use 'Illuminate\Database\Eloquent\SoftDeletes;', colocando isso na model.
+//Trait permite a implementação a herança vertical
+
+OQUE É ************************************ TRAITS?????? /++
+
+Método 'withTrashed', 'onlyTrashed' e 'restore'
+// 'withTrashed' Esse método traz os registros que estão no banco de dados e os que foram apagados. $nome_variavel->withTrashed()->get();
+// 'onlyTrashed' Esse método traz somente os que foram removidos. $nome_variavel->onlyTrashed()->get();
+// 'restore' Esse método traz os itens do método 'delete' de volta, esse método 'delete' adicionar uma data temporária para deletar os arquivos.
+
+Seeders são classe que são conhecidas como sementes, feita para semear as outras classes.
+//Recomendável colocar o nome e escrito Seeder no final. Ex: CasaSeeder, LoteSeeder.
+//Dentro da Seeder tem o método run().
+//Podemos trazer um model para o contexto da seeder. Dessa maneira 'use App\Fornecedor;'
+//Métodos de inserção de dados no banco de dados via código, dentro do laravel.
+1.
+    $fornecedor = new Fornecedor; //Nesse método a gente instancia a classe e executa depois o método save();
+    $fornecedor->nome = 'Victor';
+    $fornecedor->idade = 19;
+    $fornecedor->save();
+2.
+    Fornecedor::create([ //Nesse método utilizamos o método create(); temos que configurar o $fillable corretamente para poder modificar as variaveis.
+        'nome' => 'Victor';
+        'idade' => 19;
+    ]);
+3.
+    DB:table('fornecedores')->insert([ //Nesse método indicarmos a tabela necessaria e usamos o método insert. Pós isso, php artisan db:seed. Necessário configurar a chamada no DatabaseSeeder. A chamada:'$this->call(FornecedorSeeder::class);'
+        'nome' => 'Victor';
+        'idade' => 19;
+    ]); //Especificando somente uma classe para inserção de dados  'php artisan db:seed --class=NomeSeeder'
+OBS: MUITO IMPORTANTE É SER CHAMADA NO DatabaseSeeder.php DE ACORDO COM A TABELA. '$this->call(MotivoContatoSeeder::class);'
+
+Factories através de um seeder permite semear em massa, bom para testes. //Recomendavel utilizar o faker para testes.
+//Criação de factory: php artisan make:factory SiteContatoFactory --model=SiteContato //Importante sinalizar o nome e no final 'Factory', 'nomeFactory'. Importante sinalizar o model que vamos ter como base para criação da nossa factory.
+//Incrementando dados com factory no banco de dados 'factory(SiteContato::class, 100)->create();'. Assim estamos gerando 100 dados do SiteContato e inserindo
+
+Trabalhando com formularios e $request
+$request //É a requisição do browser para o servidor. Ex: Requisição de envio, requisição de download, requisição de troca de página.
+//O laravel faz o $request virar um objeto e assim podemos manipulá-lo no controlador ou em uma action.
+//Sem o @csrf não conseguiriamos ter o $request do formulario no backend. Lembre-se de configurar!
+//$request ele sempre pega os 'names' dos inputs, eles seram utilizados para o array associativo. Utilize sempre o dd para chega o array.
+//Recuperação de parametros do request echo '<pre>'; print_r($request->all()); echo'<pre>'; echo$request->input('email); //all recupera todos os parametros, input recupera o parametro especificado.
+//Salvando os dados dentro do formulário $contato->nome = $request->input('nome'); $contato->save(); //O nome do $request vai ficar salvo no banco de dados.
+//Outra forma bem mais prática. $contato = new SiteContato(); $contato->fill($request->all()); //Permitindo o $fillable e configurando na Model SiteContato.
+//Também pode ser usado o create ao invés do fill. $contato = new SiteContato(); $contato->create($request->all());
+       
+Validação do formulario.
+//A chave para validação do formulário é o name, que é dado.
+//Realizar validação.
+$request->validate(['nome' => 'required']); //Esse é um exemplo de validação, detalhe a chave para determinar a validação é o name de onde ela é aplicada.
+//Alguns outros campos 'description.min' O cmpo tem que ter no minimo 3 caracteres. 'expiration_time.min' O campo deve ser a quantidade de dias. 'price.regex' O campo deve conter um valor monetário.
+
+Dica em HTML: Placeholder não aplica value, apenas adicionar uma descrição.
+
+//OBS: Questão de validação de formulário é interessante, podemos checar se o arquivo foi enviado ou o tipo dele, mesmo sem usar o if, else. Sendo $request e dentro do dele verificando os parametros 'required' e 'mimes'.
+
+//Request Old Input o motor de renderização blade, possuir uma função chamada old(), ele pode recuperar as informações da requisição anterior, caso aconteceça algum erro no envio é bom utiliza-lo, para poupar templo do cliente.
+//Utilizamos dentro do motor de renderização blade, especificaNDO 'value = "{{old('nome')}}"'
+
+//Dica do Bootstrap se for !important ele sempre roda antes de um que não tem !important, ou seja.
+// 1.<div> Essa div não é importante e é vermelho 2.<div> Essa div é importante e a cor é azul 2.</div> 1.</div> //A cor predominante é azul.
+
+//Para utilizar o old em um select, uma caixa com opções em HTML. Fazemos dessa forma '<option value="1" {{ old('motivo_contato') == 1 ? 'selected' : ''}}>Dúvida</option>'
+
+//Crianos um Array, na controller e passamos para o componets do forms, o array tem as casas e as informações.
+@foreach($motivo_contatos as $key -> $motivo_contato) <option value="{{$key}}" {{old('motivo_contato') == $key ? 'selected' : ''}} > {{$motivo_contato}} </option> @endforeach
+//Pode ser isso tmb.
+<option value="1" {{ old('motivo_contato') == 1 ? 'selected' : ''}}>Dúvida</option>
+<option value="2" {{ old('motivo_contato') == 2 ? 'selected' : ''}}>Elogio</option>
+<option value="3" {{ old('motivo_contato') == 3 ? 'selected' : ''}}>Reclamação</option>
+
+//Banco de dados ligado com o foreach é muito interessante do que definir um array e usa-lo.
+//Conecte um array com um banco de dados pós isso adicione colunas via banco de dadps.
+//Ex: Isso é muito importante.
+$motivo_contatos = MotivoContato::all(); //Dentro do controlador
+
+MotivoContato::create(['motivo_contato'=>'Dúvida']); //Método estático //Dentro da Seeder
+MotivoContato::create(['motivo_contato'=>'Elogio']); //Dentro da Seeder
+MotivoContato::create(['motivo_contato'=>'Reclamação']); //Dentro da Seeder
+
+@foreach($motivo_contatos as $key => $motivo_contato)
+    <option value="{{$motivo_contato->id}}" {{old('motivo_contato') == $motivo_contato->id ? 'selected' : ''}} > {{$motivo_contato->motivo_contato}} </option>
+@endforeach //Dentro do components, banco de dados interligado com o código, opções podem ser adicionadas
+
+IMPORTATE:
+php artisan config:cache //Limpar as configurações de cache, utilizei para resolver um problema no banco de dados.
+php artisan migrate:install //Utiliei pois, tive que trocar o computador e as migrations não eram executadas com 'php artisan migrate'.
+
+Customizando a váriavel de ambiente $errors.
+@if($errors->any()) //Caso exista algum erro ele entra no if  @endif
+//Transformando a váriavel do ambiente em um array. Ficando mais facil a visualização.
+@foreach($errors->all() as $erro) {{$erro}} @endforeach //Utilizando o foreach e dando os dados de $erros para um array $erro. 
+@if($errors->has('nome')) {{$errors->first('nome')}} @endif  //$errors->first() mostra o primeiro erro se first('nome') mostra o erro de 'nome' //Verifica se a referência do input 'nome', tem algum erro, utilizando o método has().
+{{$errors->has('telefone') ? $errors->first('telefone') : ""}} //Utilizando o operador ternário para retorno de erro ou não.
+
+Mensagem de erro personalizada
+$request->validate(
+    $regras = [
+        //Essas requisições podem ser adicionadas as váriaveis
+        'nome' => 'required|unique:site_contatos',  //nome.required se não for enviado retorna a mensagem de erro
+        'telefone' => 'required'
+    ],
+    $feedback = [
+        'nome.unique' => "O nome não é unico" //nome.unique se foi registrado no banco de dados retornar um erro
+        'required' => "O campo :attribute é requerido" //Pode ser usado para multiplos campos, sem que seja escrito várias vezes. :attribute ele pega o nome de acordo com a requisição
+    ]
+); //Colocamos um novo array e puxamos as constraint e personalizamos a mensagem
+$request->validate($regras, $feedback); //Validando os arrays.
+
+Middlewares? O que é? Implementação.
+//Middlewares liberam o acesso para o usuário caso ele esteja logado. Eles funcionam como intermediador de comunicação de entrada e saida em aplicações distintas.
+Browser > Request > Middlewares
+Browser < Responde < Middlewares
+//Podemos diferenciar cargo com middlewares, podemos fazer muita coisa com as middlewares. Ex: Saber o browser que foi utilizado para o acesso, pegar o IP de origem, bloquear a navegação.
+CORS: Compartilhamento de recursos com origens diferentes, isso é usado para os middlewares response //Aplicações web que se comunicam com protocolos e dominios ou portas diferentes com o mesmo dominio.
+Route::middleware(LogAcessoMiddleware::class)->get('/', 'PrincipalController@principal')->name('site.index'); // Aplicação da Middleware
+//Podemos atribuir uma middleware em um grupo de rotas.
+
+Middleware implementada no controlador:
+public function __construct(){ $this->middleware(LogAcessoMiddleware::class);} //Implementando um middleware no controlador e utilizando o construtor, sempre será executado primeiro.
+
+Dentro do middleware o método Response(''); Trata uma resposta para o request do usuario. Ex: return Responser('Não passamos do middleware');
+//Dessa forma o middlewar deu block no $request do requerente, lembre-se o 'return $request' definido pelo middleware foi apagado para a response, mas podemos usar também.
+
+Apelidando middleware, dentro do Kernel.php:
+'log.acesso' => \App\Http\Middleware\LogAcessoMiddleware::class //É colocado no protected $routeMiddleware
+
+Quando formos para a rota colocarmos ->middleware('log.acesso');
+Quando formos para o controlador colocarmos 'public function __construct(){ $this->middleware('log.acesso');}'
+
+
+Passando parametros se dentro da middleware tiver passando o parametro, há mais na handle.
+public function handle($request, Closure $next, $metodo_autenticacao){{}} //Podemos passar mais de um parametro, ou seja além do $metodo_autenticacao
+if($metodo_autenticacao == 'padrao'){} if($metodo_autenticacao == 'ldap'){}
+Route::middleware('log.acesso','autenticacao:padrao')->prefix('/app')->group(function() {Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');});
+//Esse exemplo acima passamos um parametro para a rota e verificamos qual o padrao do usuario.
+//Em autenticacao:padrao, se quisermos receber mais parametros separamos por virgula. 'autenticacao:padrao, visitante.
+
+
