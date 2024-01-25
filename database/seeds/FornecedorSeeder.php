@@ -35,7 +35,6 @@ class FornecedorSeeder extends Seeder
             'uf' => 'SP',
             'email' => 'contato@fornecedor300@.con.br'
         ]);
-       
-
+        //Formas de fazer isso
     }
 }

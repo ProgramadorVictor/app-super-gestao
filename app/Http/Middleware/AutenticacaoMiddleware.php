@@ -21,8 +21,6 @@ class AutenticacaoMiddleware
         }else{
             return redirect()->route('site.login', ['erro' => 2]);
         }
-
-
         /*
         echo $metodo_autenticacao.'-'.$perfil.'<br>';
         if($metodo_autenticacao == 'padrao'){

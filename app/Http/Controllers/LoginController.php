@@ -70,6 +70,7 @@ class LoginController extends Controller
         echo "</pre>";
     }
     public function sair() {
+        //Aqui estamos usando comandos de session no qual é do php, ao invés dos comandos do Laravel.
         session_destroy(); //Destruindo a sessão em outra palaravas, fazendo o logout
         return redirect()->route('site.index'); //Redirecionando para a rota do site principal.
     }

@@ -16,8 +16,6 @@ class FornecedorController extends Controller
 
     public function adicionar (Request $req){
         print_r($req->all());
-
-
         return view('app.fornecedor.adicionar');
     }
 
