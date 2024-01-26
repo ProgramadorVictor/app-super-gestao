@@ -11,7 +11,7 @@
         <ul>
             <li><a href="{{route('app.fornecedor.adicionar')}}">Novo</a><li>
             <li><a href="">Consulta</a><li>
-        </ul>
+        </ul> 
     </div>
     <div class="informacao-pagina">
         <div style="width: 30%; margin-left: auto; margin-right:auto;">

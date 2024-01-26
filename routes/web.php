@@ -13,7 +13,7 @@ Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware
 Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
-//'log.acesso','autenticacao:ldap,v  isitante'
+//'log.acesso','autenticacao:ldap,visitante'
 Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(function() {//Grupo de rotas, aplicando middlewares
     //OBS: ATENTE AOS DETALHES DO PREFIX /APP. para acessar a rota é http://127.0.0.1:8000/app/cliente ao invés de http://127.0.0.1:8000/cliente
     //Encadaeamento de middlewares, escolhendo também a ordem, aqui passará por log.acesso primeiro e após passará pelo autenticacao.

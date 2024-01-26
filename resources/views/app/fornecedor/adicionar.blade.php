@@ -14,14 +14,28 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        {{$msg}}
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
-            <form method="post" action="{{route('app.fornecedor.adicionar')}}">
+            {{-- 
+                autocomplete ="off"
+                //Atributo de input, usado para formulários para, não preencher automaticamente.    
+            --}}
+            <form autocomplete="off" ="post" action="{{route('app.fornecedor.adicionar')}}">
                 @csrf
-                <input type="text" name="nome" placeholder="Nome" class="borda-preta">
-                <input type="text" name="site" placeholder="Site" class="borda-preta">
-                <input type="text" name="uf" placeholder="UF" class="borda-preta">
-                <input type="text" name="email" placeholder="E-mail" class="borda-preta">
+                <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="{{old('nome')}}">
+                {{$errors->has('nome') ? $errors->first('nome') : ''}}
+                <input type="text" name="site" placeholder="Site" class="borda-preta" value="{{old('site')}}">
+                {{$errors->has('site') ? $errors->first('site') : ''}}
+                <input type="text" name="uf" placeholder="UF" class="borda-preta" value="{{old('uf')}}">
+                {{$errors->has('uf') ? $errors->first('uf') : ''}}
+                <input type="text" name="email" placeholder="E-mail" class="borda-preta" value="{{old('email')}}">
+                {{$errors->has('email') ? $errors->first('email') : ''}}
                 <button type="submt" class="borda-preta">Cadastrar</button>
+                {{-- 
+                    TEM VÁRIAS FORMAS DE FAZER UMA BOA VALIDAÇÃO, EU USO JAVASCRIPT -> JQUERY
+                    1) Poderia usar esse $req->validate() é do próprio Laravel.
+                    2) Fazer testes em outros sistemas.
+                --}}
             </form>
         </div>
     </div>
