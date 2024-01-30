@@ -193,3 +193,20 @@ button:hover {
 .redes-sociais img {
     margin: 0px 15px 0px 15px;
 }
+/* AQUI VEM O CSS DO MÉTODO PAGINATE */
+.pagination li{
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-weight: bold; /* EU IMPLEMENTEI ESSE ESTILO */
+    font-size: 20px;
+}
+.pagination ul{
+    list-style-type: none;
+}
+.pagination a{
+    text-decoration: none; /* EU IMPLEMENTEI ESSE ESTILO */
+}
+.active{
+    text-decoration: underline; /* EU IMPLEMENTEI ESSE ESTILO */
+}

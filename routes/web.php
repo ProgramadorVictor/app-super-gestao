@@ -9,7 +9,6 @@ Route::middleware('log.acesso')->group(function(){ //Rota aplicada em grupo para
 });
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos'); //Middleware também esta aplicado, porém no controlador, utilizando construtor.
 Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware('log.acesso'); //Apelido para rota definita no Kernel.php //2 Modo de usar a middleware
-
 Route::get('/login/{erro?}', 'LoginController@index')->name('site.login');
 Route::post('/login', 'LoginController@autenticar')->name('site.login');
 
@@ -23,9 +22,11 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     Route::get('/produto', 'ProdutoController@index')->name('app.produto');
 
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
+    Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
     Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
     Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    Route::get('/fornecedor/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedor.editar'); //Rota editar para editar os dados dos fornecedores.
 });
 
 Route::fallback(function() {
