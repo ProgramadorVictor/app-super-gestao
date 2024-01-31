@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
 {
-    public function index()
+    public function index($msg = '')
     {
-        return view('app.fornecedor.index');
+        return view('app.fornecedor.index', ['msg' => $msg]);
     }
 
     public function listar(Request $req)
@@ -38,6 +38,7 @@ class FornecedorController extends Controller
     public function adicionar(Request $req)
     {
 
+        dd("a");
         $msg = '';
         $classe = '';
         $dados = [
@@ -97,6 +98,28 @@ class FornecedorController extends Controller
         $fornecedor = Fornecedor::find($id); //Recuperando os dados do Fornecedor pelo $id, no qual vai ser selecionado na listagem. 
         // Aqui estamos reutilizando uma view, isso é muito importante e deveras interessante
         return view('app.fornecedor.adicionar', ['fornecedor' => $fornecedor, 'msg' => $msg]);
+    }
+    public function excluir($id, $msg = ''){
+        //Essa função foi feita por mim, desde excluir as mensagens retornadas até a modificações na rota.
+
+        // $fornecedor = Fornecedor::find($id)->delete(); //Dessa maneira não apaga totalmente.
+        //Dessa forma acima, os dados não sao apagados de forma permanente ainda permanece nos registros, porém não aparece para as pessoas, somente no banco de dados.
+        //Acima preenche a tabela deleted_at
+        $fornecedor = Fornecedor::find($id)->forceDelete(); //Dessa forma apaga o registro completo, sem preencher a tabela deleted_at.
+        if($fornecedor){
+            $msg = "Sucesso ao deletar o fornecedor";
+        }else{
+            $msg = "Erro ao deletar o fornecedor";
+        }
+        return redirect()->route('app.fornecedor', ['msg' => $msg]);
+        //Alguns métodos interessantes para usar index(), create(), store(), show(), edit(), update(), destroy().
+        //index() - Exibe a lista de registros
+        //create() - Exibir formulários de criação do registros
+        //store() - Receber formulário de criação de registro
+        //show() - Exibir registro especifico
+        //edit() - Exibir formulários de edição de registro
+        //update() - Receber formulário de edição de registro
+        //destroy() - Receber dados para remoção de registro
     }
 }
 /*

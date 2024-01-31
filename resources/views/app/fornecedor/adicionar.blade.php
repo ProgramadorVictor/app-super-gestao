@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class="informacao-pagina">
-        {{$msg ?? ''}} {{-- COALESCÊNCIA NULA --}}
+        {{-- {{$msg ?? ''}} --}}
         {{-- FAZEMOS TESTE AQUI O NOME DISSO ?? É  COALESCÊNCIA NULA --}}
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             {{-- 
@@ -38,7 +38,7 @@
                 {{$errors->has('uf') ? $errors->first('uf') : ''}}
                 <input type="text" name="email" placeholder="E-mail" class="borda-preta" value="{{$fornecedor->email ?? old('email')}}">
                 {{$errors->has('email') ? $errors->first('email') : ''}}
-                <button type="submt" class="borda-preta">{{isset($fornecedor->id) ? 'Editar' : 'Cadastrar'}}</button>
+                <button type="submit" class="borda-preta">{{isset($fornecedor->id) ? 'Editar' : 'Cadastrar'}}</button>
                 {{-- 
                     TEM VÁRIAS FORMAS DE FAZER UMA BOA VALIDAÇÃO, EU USO JAVASCRIPT -> JQUERY
                     1) Poderia usar esse $req->validate() é do próprio Laravel.

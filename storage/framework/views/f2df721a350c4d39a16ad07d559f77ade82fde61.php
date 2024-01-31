@@ -36,7 +36,8 @@
                             <td><?php echo e($fornecedor->site); ?></td>
                             <td><?php echo e($fornecedor->uf); ?></td>
                             <td><?php echo e($fornecedor->email); ?></td>
-                            <td>Excluir</td>
+                            
+                            <td><a href="<?php echo e(route('app.fornecedor.excluir', $fornecedor->id)); ?>">Excluir</a></td>
                             
                             <td><a href="<?php echo e(route('app.fornecedor.editar', $fornecedor->id)); ?>">Editar</a></td>
                         </tr>
@@ -49,13 +50,9 @@
             <?php echo e($fornecedores->appends($req)->links()); ?>
 
             
-            Total de registros por página - <?php echo e($fornecedores->count()); ?>
-
+            
             <br>
-            Total de registros da consulta - <?php echo e($fornecedores->total()); ?>
-
-            <br>
-            Número do primeir registro da página - <?php echo e($fornecedores->firstItem()); ?>
+            Exibindo <?php echo e($fornecedores->count()); ?> fornecedores de <?php echo e($fornecedores->total()); ?> (de <?php echo e($fornecedores->firstItem()); ?> a <?php echo e($fornecedores->lastItem()); ?>)
 
         </div>
     </div>
