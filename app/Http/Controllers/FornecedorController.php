@@ -23,7 +23,7 @@ class FornecedorController extends Controller
 
         //Uma forma diferente de visualizar os registros com o método paginate
         //OBS: Ele traz uma limitaração de registro por pagina
-        $fornecedores = Fornecedor::where('nome', 'like', '%'. $req->nome.'%')
+        $fornecedores = Fornecedor::where('nome', 'like', '%'. $req->input('nome').'%')
         ->where('site', 'like', '%'.$req->input('site').'%')
         ->where('uf', 'like', '%'.$req->uf.'%')
         ->where('email', 'like', '%'.$req->input('email').'%')
@@ -35,10 +35,10 @@ class FornecedorController extends Controller
         // return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
     }
 
+
     public function adicionar(Request $req)
     {
-
-        dd("a");
+        
         $msg = '';
         $classe = '';
         $dados = [
@@ -46,7 +46,7 @@ class FornecedorController extends Controller
             'classe' => $classe,
         ]; //Padrão utilizado pela prefeitura na criação de sistemas.
         //AQUI É O METODO DE ADIÇÃO
-        if ($req->input('_token') != '' && $req->id == '') {
+        if ($req->input('_token') != '' && $req->input('id') == '') {
             $regras = [
                 'nome' => 'required|min:3max:40',
                 'site' => 'required',
@@ -75,10 +75,12 @@ class FornecedorController extends Controller
                 // 'classe' => //Costume utilizado na criação de sites para a prefeitura a classe era passado como o alert do bootstrap
                 // 'alert-success shows', entre outros alertas.
             ];
+            
             // echo 'Cadastrado com sucesso';
         }
         //AQUI É O MÉTODO DE EDIÇÃO, VERIFICAMOS SE O ID É DIFERENTE DE NULO E O INPUT É DIFERENTE DE VAZIO
-        if ($req->input('_token') != '' && $req->id != '') {
+        if ($req->input('_token') != '' && $req->input('id') != '') {
+           // dd($req);
             $fornecedor = Fornecedor::find($req->id); //BUSCANDO PELO ID
             $update = $fornecedor->update($req->all());
             //Aqui é a saida se deu certo o registro é alterado com sucesso, se não o registro não é alterado.
@@ -87,7 +89,7 @@ class FornecedorController extends Controller
             }else{
                 $msg = "Update apresentou problemas";
             }
-            return redirect()->route('app.fornecedor.editar', ['id'=> $fornecedor->id, 'msg' => $msg, ]);
+            return redirect()->route('app.fornecedor.editar', ['id'=> $req->id, 'msg' => $msg]);
         }
         // print_r($req->all()); //Mostrando os dados do formulario com o _token
         //OBS: NESSE RETORNO FOI UMA MODIFICAÇÃO FEITA POR EU, PARA PASSA A VARIAVEL FORNECEDOR PARA LA, PÓS EDIÇÃO EU QUERO QUE OS DADOS PERSITEM

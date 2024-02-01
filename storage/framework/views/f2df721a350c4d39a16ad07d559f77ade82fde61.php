@@ -10,7 +10,7 @@
     <div class="menu">
         <ul>
             
-            <li><a href="<?php echo e(route('app.fornecedor.adicionar')); ?>">Novo</a><li>
+            <li><a href="<?php echo e(route('app.fornecedor.add')); ?>">Novo</a><li>
             <li><a href="<?php echo e(route('app.fornecedor')); ?>">Consulta</a><li>
         </ul>
     </div>
@@ -47,13 +47,18 @@
             
             
             
-            <?php echo e($fornecedores->appends($req)->links()); ?>
+
+            
+
+
+
+
+
 
             
             
             <br>
             Exibindo <?php echo e($fornecedores->count()); ?> fornecedores de <?php echo e($fornecedores->total()); ?> (de <?php echo e($fornecedores->firstItem()); ?> a <?php echo e($fornecedores->lastItem()); ?>)
-
         </div>
     </div>
 </div>

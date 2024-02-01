@@ -5,29 +5,29 @@
 @section('conteudo')
 <div class="conteudo-pagina">
     <div class="titulo-pagina-2">
-        <p>Fornecedor - {{isset($fornecedor->id) ? 'Editar' : 'Adicionar'}}</p>
+        <p>Fornecedor ADICIONAR - {{isset($fornecedor->id) ? 'Editar' : 'Adicionar'}}</p>
         {{-- MODIFICAÇÃO FEITA POR MIM --}}
     </div>
     <div class="menu">
         <ul>
-            <li><a href="{{route('app.fornecedor.adicionar')}}">Novo</a><li>
+            <li><a href="{{route('app.fornecedor.add')}}">Novo</a><li>
             <li><a href="{{route('app.fornecedor')}}">Consulta</a><li>
         </ul>
     </div>
     <div class="informacao-pagina">
-        {{-- {{$msg ?? ''}} --}}
+        {{$msg ?? ''}}
         {{-- FAZEMOS TESTE AQUI O NOME DISSO ?? É  COALESCÊNCIA NULA --}}
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             {{-- 
                 autocomplete ="off"
                 //Atributo de input, usado para formulários para, não preencher automaticamente.    
             --}}
-            <form autocomplete="off" ="post" action="{{route('app.fornecedor.adicionar')}}">
+            <form autocomplete="off" method="post" action="{{route('app.fornecedor.add')}}">
                 <input type="hidden" name="id" value="{{$fornecedor->id ?? ''}}">
+                @csrf
                 {{-- SE NÃO TIVER ESSA TAG COM O NAME ID, ELE NÃO SERÁ PASSADO PARA O $REQ DO CONTROLADOR E NÃO IRA SEGUIR A LOGICA DO CÓDIGO --}}
                 {{-- SE NÃO TEM O PARAMETRO ELE SEMPRE VAI ENTRA EM ADICIONAR SE TIVER O PARAMETRO PASSADO ELE VAI ENTRAR EM EDIÇÃO --}}
                 {{-- ISSO É MUITO IMPORTANTE, $FORNECEDOR->ID PASSA ANTES PELO METODO EDITAR E TRAS TODOS OS PARAMETROS PARA ESSA TELA. --}}
-                @csrf
                 <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="{{$fornecedor->nome ?? old('nome')}}">
                 {{-- CASO $fornecedor->nome esteja definido ele será impresso. --}}
                 {{$errors->has('nome') ? $errors->first('nome') : ''}}

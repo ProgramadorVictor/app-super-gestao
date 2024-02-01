@@ -10,7 +10,7 @@
     <div class="menu">
         <ul>
             {{-- <li><a href="{{route('app.fornecedor.listar')}}">Novo</a><li> --}}
-            <li><a href="{{route('app.fornecedor.adicionar')}}">Novo</a><li>
+            <li><a href="{{route('app.fornecedor.add')}}">Novo</a><li>
             <li><a href="{{route('app.fornecedor')}}">Consulta</a><li>
         </ul>
     </div>
@@ -47,7 +47,14 @@
             {{-- UTILIZAMOS O MÉTODO DE PAGINATE PARA FAZER A PAGINAÇÃO DA LISTA, AGORA TEMOS A PAGINAÇÃO E PODEMOS VER COM '$fornecedores->links()' --}}
             {{-- {{$fornecedores->links()}} --}}
             {{-- AO INVÉS DE USAR ISSO ACIMA, RESOLUÇÃO DO PROBLEMA ABAIXO, NO QUAL AO CLICA EM UM PAGINATE AS QUERYS SÃO RESETADAS --}}
-            {{$fornecedores->appends($req)->links()}}
+
+            {{-- {{$fornecedores->appends($req)->links()}} --}}
+
+
+
+
+
+
             {{-- NO INICIO FICA UMA TELA PESSIMA, MAS PODEMOS MODIFICAR O ESTILO NA PUBLIC --}}
             {{-- Total de registros por página - {{$fornecedores->count()}}
             <br>
@@ -58,7 +65,6 @@
             Número do ultimo registro da página - {{$fornecedores->lastItem()}} --}}
             <br>
             Exibindo {{$fornecedores->count()}} fornecedores de {{$fornecedores->total()}} (de {{$fornecedores->firstItem()}} a {{$fornecedores->lastItem()}})
-
         </div>
     </div>
 </div>
