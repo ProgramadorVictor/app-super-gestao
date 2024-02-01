@@ -1,17 +1,17 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Fornecedor')
+@section('titulo', 'Produto')
 
 @section('conteudo')
 <div class="conteudo-pagina">
     <div class="titulo-pagina-2">
-        <p>Fornecedor - Listar</p>
+        <p>Listagem de Produtos</p>
     </div>
     <div class="menu">
         <ul>
             {{-- <li><a href="{{route('app.fornecedor.listar')}}">Novo</a><li> --}}
-            <li><a href="{{route('app.fornecedor.adicionar')}}">Novo</a><li>
-            <li><a href="{{route('app.fornecedor')}}">Consulta</a><li>
+            <li><a href="{{route('produto.create')}}">Novo</a><li>
+            <li><a href="">Consulta</a><li>
         </ul>
     </div>
     <div class="informacao-pagina">
@@ -22,24 +22,24 @@
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Site</th>
-                        <th>UF</th>
-                        <th>E-mail</th>
+                        <th>Descrição</th>
+                        <th>Peso</th>
+                        <th>Unidade ID</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($fornecedores as $fornecedor)
+                    @foreach($produtos as $produto)
                         <tr>
-                            <td>{{$fornecedor->nome}}</td>
-                            <td>{{$fornecedor->site}}</td>
-                            <td>{{$fornecedor->uf}}</td>
-                            <td>{{$fornecedor->email}}</td>
+                            <td>{{$produto->nome}}</td>
+                            <td>{{$produto->descricao}}</td>
+                            <td>{{$produto->peso}}</td>
+                            <td>{{$produto->unidade_id}}</td>
                             {{-- PASSSANDO DOIS, PARAMETROS PARA A ROTA. --}}
-                            <td><a href="{{route('app.fornecedor.excluir', $fornecedor->id)}}">Excluir</a></td>
+                            <td><a href="">Excluir</a></td>
                             {{-- EM EDITAR, PASSAMOS UM PARAMETRO PARA IDENTIFICAR QUAL O FORNECEDOR ESTAMOS EDITANDO--}}
-                            <td><a href="{{route('app.fornecedor.editar', $fornecedor->id)}}">Editar</a></td>
+                            <td><a href="">Editar</a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -47,7 +47,7 @@
             {{-- UTILIZAMOS O MÉTODO DE PAGINATE PARA FAZER A PAGINAÇÃO DA LISTA, AGORA TEMOS A PAGINAÇÃO E PODEMOS VER COM '$fornecedores->links()' --}}
             {{-- {{$fornecedores->links()}} --}}
             {{-- AO INVÉS DE USAR ISSO ACIMA, RESOLUÇÃO DO PROBLEMA ABAIXO, NO QUAL AO CLICA EM UM PAGINATE AS QUERYS SÃO RESETADAS --}}
-            {{$fornecedores->appends($req)->links()}}
+            {{$produtos->appends($req)->links()}}
             {{-- NO INICIO FICA UMA TELA PESSIMA, MAS PODEMOS MODIFICAR O ESTILO NA PUBLIC --}}
             {{-- Total de registros por página - {{$fornecedores->count()}}
             <br>
@@ -57,7 +57,7 @@
             <br>
             Número do ultimo registro da página - {{$fornecedores->lastItem()}} --}}
             <br>
-            Exibindo {{$fornecedores->count()}} fornecedores de {{$fornecedores->total()}} (de {{$fornecedores->firstItem()}} a {{$fornecedores->lastItem()}})
+            Exibindo {{$produtos->count()}} fornecedores de {{$produtos->total()}} (de {{$produtos->firstItem()}} a {{$produtos->lastItem()}})
 
         </div>
     </div>
