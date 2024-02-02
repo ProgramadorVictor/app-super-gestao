@@ -15,17 +15,16 @@
         </ul>
     </div>
     <div class="informacao-pagina">
-        <?php echo e($msg ?? ''); ?>
-
+        
         
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             
-            <form autocomplete="off" method="post" action="<?php echo e(route('app.fornecedor.adicionar')); ?>">
+            <form autocomplete="off" ="post" action="<?php echo e(route('app.fornecedor.adicionar')); ?>">
                 <input type="hidden" name="id" value="<?php echo e($fornecedor->id ?? ''); ?>">
+                
+                
+                
                 <?php echo csrf_field(); ?>
-                
-                
-                
                 <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="<?php echo e($fornecedor->nome ?? old('nome')); ?>">
                 
                 <?php echo e($errors->has('nome') ? $errors->first('nome') : ''); ?>
@@ -49,4 +48,4 @@
 <?php $__env->stopSection(); ?>
 
 
-<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views/app/fornecedor/adicionar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Victor\Documents\Developer\app_super_gestao\resources\views/app/fornecedor/adicionar.blade.php ENDPATH**/ ?>

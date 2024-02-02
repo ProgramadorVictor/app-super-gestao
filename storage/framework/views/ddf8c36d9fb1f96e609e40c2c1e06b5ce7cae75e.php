@@ -52,9 +52,10 @@
             
             
             <br>
-            Exibindo <?php echo e($produtos->count()); ?> produtos de <?php echo e($produtos->total()); ?> (de <?php echo e($produtos->firstItem()); ?> a <?php echo e($produtos->lastItem()); ?>)
+            Exibindo <?php echo e($produtos->count()); ?> fornecedores de <?php echo e($produtos->total()); ?> (de <?php echo e($produtos->firstItem()); ?> a <?php echo e($produtos->lastItem()); ?>)
+
         </div>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views/app/produto/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Victor\Documents\Developer\app_super_gestao\resources\views/app/produto/index.blade.php ENDPATH**/ ?>

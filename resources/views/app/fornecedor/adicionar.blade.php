@@ -5,7 +5,7 @@
 @section('conteudo')
 <div class="conteudo-pagina">
     <div class="titulo-pagina-2">
-        <p>Fornecedor ADICIONAR - {{isset($fornecedor->id) ? 'Editar' : 'Adicionar'}}</p>
+        <p>Fornecedor - {{isset($fornecedor->id) ? 'Editar' : 'Adicionar'}}</p>
         {{-- MODIFICAÇÃO FEITA POR MIM --}}
     </div>
     <div class="menu">
@@ -22,7 +22,7 @@
                 autocomplete ="off"
                 //Atributo de input, usado para formulários para, não preencher automaticamente.    
             --}}
-            <form autocomplete="off" method="post" action="{{route('app.fornecedor.add')}}">
+            <form autocomplete="off" method="post" action="{{route('app.fornecedor.adicionar')}}">
                 <input type="hidden" name="id" value="{{$fornecedor->id ?? ''}}">
                 @csrf
                 {{-- SE NÃO TIVER ESSA TAG COM O NAME ID, ELE NÃO SERÁ PASSADO PARA O $REQ DO CONTROLADOR E NÃO IRA SEGUIR A LOGICA DO CÓDIGO --}}

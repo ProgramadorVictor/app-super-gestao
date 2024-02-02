@@ -22,17 +22,25 @@
                 
                 
                 <?php echo csrf_field(); ?>
-                <input type="text" name="nome" placeholder="Nome" class="borda-preta">
+                <input type="text" name="nome" placeholder="Nome" value="<?php echo e(old('nome')); ?>" class="borda-preta">
+                <?php echo e($errors->has('nome') ? $errors->first('nome') : ''); ?>
+
                 
                 
-                <input type="text" name="descricao" placeholder="Descrição" class="borda-preta">
-                <input type="text" name="peso" placeholder="Peso" class="borda-preta">
+                <input type="text" name="descricao" placeholder="Descrição" value="<?php echo e(old('descricao')); ?>" class="borda-preta">
+                <?php echo e($errors->has('descricao') ? $errors->first('descricao') : ''); ?>
+
+                <input type="text" name="peso" placeholder="Peso" value="<?php echo e(old('peso')); ?>" class="borda-preta">
+                <?php echo e($errors->has('peso') ? $errors->first('peso') : ''); ?>
+
                 <select name="unidade_id" id="">
                     <option>Selecione a unidade de medida</option>
                     <?php $__currentLoopData = $unidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $unidade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($unidade->id); ?>"><?php echo e($unidade->descricao); ?></option>
+                        <option value="<?php echo e($unidade->id); ?>" <?php echo e(old('unidade_id') == $unidade->id ? 'selected' : ''); ?>><?php echo e($unidade->descricao); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>
+                <?php echo e($errors->has('unidade_id') ? $errors->first('unidade_id') : ''); ?>
+
                 <button type="submit" class="borda-preta">Cadastrar</button>
                 
             </form>

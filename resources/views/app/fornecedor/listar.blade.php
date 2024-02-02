@@ -48,13 +48,8 @@
             {{-- {{$fornecedores->links()}} --}}
             {{-- AO INVÉS DE USAR ISSO ACIMA, RESOLUÇÃO DO PROBLEMA ABAIXO, NO QUAL AO CLICA EM UM PAGINATE AS QUERYS SÃO RESETADAS --}}
 
+            {{$fornecedores->links()}}
             {{-- {{$fornecedores->appends($req)->links()}} --}}
-
-
-
-
-
-
             {{-- NO INICIO FICA UMA TELA PESSIMA, MAS PODEMOS MODIFICAR O ESTILO NA PUBLIC --}}
             {{-- Total de registros por página - {{$fornecedores->count()}}
             <br>
@@ -63,7 +58,6 @@
             Número do primeiro registro da página - {{$fornecedores->firstItem()}} 
             <br>
             Número do ultimo registro da página - {{$fornecedores->lastItem()}} --}}
-            <br>
             Exibindo {{$fornecedores->count()}} fornecedores de {{$fornecedores->total()}} (de {{$fornecedores->firstItem()}} a {{$fornecedores->lastItem()}})
         </div>
     </div>

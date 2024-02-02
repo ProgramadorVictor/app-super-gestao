@@ -25,17 +25,21 @@
                 {{-- SE NÃO TEM O PARAMETRO ELE SEMPRE VAI ENTRA EM ADICIONAR SE TIVER O PARAMETRO PASSADO ELE VAI ENTRAR EM EDIÇÃO --}}
                 {{-- ISSO É MUITO IMPORTANTE, $FORNECEDOR->ID PASSA ANTES PELO METODO EDITAR E TRAS TODOS OS PARAMETROS PARA ESSA TELA. --}}
                 @csrf
-                <input type="text" name="nome" placeholder="Nome" class="borda-preta">
+                <input type="text" name="nome" placeholder="Nome" value="{{old('nome')}}" class="borda-preta">
+                {{$errors->has('nome') ? $errors->first('nome') : ''}}
                 {{-- CASO $fornecedor->nome esteja definido ele será impresso. --}}
                 {{-- Caso ocorra algum erro $errors->has(). verifica se tem algum erro e retornar o erro da variavel. --}}
-                <input type="text" name="descricao" placeholder="Descrição" class="borda-preta">
-                <input type="text" name="peso" placeholder="Peso" class="borda-preta">
+                <input type="text" name="descricao" placeholder="Descrição" value="{{old('descricao')}}" class="borda-preta">
+                {{$errors->has('descricao') ? $errors->first('descricao') : ''}}
+                <input type="text" name="peso" placeholder="Peso" value="{{old('peso')}}" class="borda-preta">
+                {{$errors->has('peso') ? $errors->first('peso') : ''}}
                 <select name="unidade_id" id="">
                     <option>Selecione a unidade de medida</option>
                     @foreach($unidades as $unidade)
-                        <option value="{{$unidade->id}}">{{$unidade->descricao}}</option>
+                        <option value="{{$unidade->id}}" {{old('unidade_id') == $unidade->id ? 'selected' : ''}}>{{$unidade->descricao}}</option>
                     @endforeach
                 </select>
+                {{$errors->has('unidade_id') ? $errors->first('unidade_id') : '' }}
                 <button type="submit" class="borda-preta">Cadastrar</button>
                 {{-- 
                     TEM VÁRIAS FORMAS DE FAZER UMA BOA VALIDAÇÃO, EU USO JAVASCRIPT -> JQUERY

@@ -47,15 +47,15 @@
             
             
             
+            <?php echo e($fornecedores->appends($req)->links()); ?>
 
-            <?php echo e($fornecedores->links()); ?>
-
             
             
-            
+            <br>
             Exibindo <?php echo e($fornecedores->count()); ?> fornecedores de <?php echo e($fornecedores->total()); ?> (de <?php echo e($fornecedores->firstItem()); ?> a <?php echo e($fornecedores->lastItem()); ?>)
+
         </div>
     </div>
 </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views/app/fornecedor/listar.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('app.layouts.basico', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Victor\Documents\Developer\app_super_gestao\resources\views/app/fornecedor/listar.blade.php ENDPATH**/ ?>

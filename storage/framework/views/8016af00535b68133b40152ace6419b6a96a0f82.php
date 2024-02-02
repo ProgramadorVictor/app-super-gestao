@@ -13,4 +13,5 @@
             <li><a href="<?php echo e(route('app.sair')); ?>">Sair</a></li>
         </ul>
     </div>
-</div><?php /**PATH D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views/app/layouts/_partials/topo.blade.php ENDPATH**/ ?>
+</div>
+ <?php /**PATH C:\Users\Victor\Documents\Developer\app_super_gestao\resources\views/app/layouts/_partials/topo.blade.php ENDPATH**/ ?>
