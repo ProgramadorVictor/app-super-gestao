@@ -9,7 +9,7 @@
     </div>
     <div class="menu">
         <ul>
-            <li><a href="<?php echo e(route('app.fornecedor.add')); ?>">Novo</a><li>
+            <li><a href="<?php echo e(route('app.fornecedor.adicionar')); ?>">Novo</a><li>
             <li><a href="<?php echo e(route('app.fornecedor')); ?>">Consulta</a><li>
         </ul> 
     </div>
