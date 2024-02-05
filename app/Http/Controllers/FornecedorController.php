@@ -19,6 +19,7 @@ class FornecedorController extends Controller
         ->where('email', 'like', '%'.$req->email.'%')
         ->paginate(15); //Utilização do paginate, funciona bem para organização de listagem de registros
         //Estou mandado para a tela listar.blade.php e ai estou acessando por la
+        //ATENTO: Talvezz utilizar esse código em outro projeto com CSS, para quando fazer a movimentação passa de página.
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'req' => $req->all()]);
     }
 

@@ -7,17 +7,9 @@ use Illuminate\Http\Request;
 use App\Produto;
 use App\Unidade;
 
+
 class ProdutoController extends Controller
-{  
-    //Isso é muito interessante criado com php artisan make:controller --resource ProdutoController    
-    //Alguns métodos interessantes para usar index(), create(), store(), show(), edit(), update(), destroy().
-    //index() - Exibe a lista de registros
-    //create() - Exibir formulários de criação do registros
-    //store() - Receber formulário de criação de registro
-    //show() - Exibir registro especifico
-    //edit() - Exibir formulários de edição de registro
-    //update() - Receber formulário de edição de registro
-    //destroy() - Receber dados para remoção de registro
+{
     /**
      * Display a listing of the resource.
      *
@@ -28,6 +20,7 @@ class ProdutoController extends Controller
         $produtos = Produto::paginate(10);
         return view('app.produto.index', ['produtos' => $produtos, 'req' => $req->all()]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,8 +50,6 @@ class ProdutoController extends Controller
         // $produto->nome = $nome;
         // $produto->descricao = $descricao;
         // $produto->save(); 
-
-
         $regras = [
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
@@ -84,45 +75,55 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Produto $produto)
     {
-        //
+        return view('app.produto.show', ['produto' => $produto]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Produto $produto) //Edição de produto
     {
-        //
-    }
+        $unidades = Unidade::all();
+        return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
+        // return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+    } 
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Produto $produto) //Atualização de produto
     {
-        //
+        // $request->all(); //payload = dados enviados pelo formulario
+        // $produto; //Instancia do objeto do estado anterior
+        // dd($request->all(), $produto->getAttributes()); //Olhando as informações do update e dos dados dentro de $produto.
+        // $produto = $request->all(); //Não faça dessa forma, ele vai ter campos extras, como token e method, use o método update.
+        $produto->update($request->all());
+        return redirect()->route('produto.show', ['produto'=> $produto->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Produto  $produto
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produto $produto) //Apagar o registro do produto
     {
-        //
+        $produto->delete();
+        return redirect()->route('produto.index');
     }
 }
+
+

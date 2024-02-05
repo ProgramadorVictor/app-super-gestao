@@ -21,6 +21,9 @@ class AutenticacaoMiddleware
         }else{
             return redirect()->route('site.login', ['erro' => 2]);
         }
+        //Pra isso funcionar no caso temos que colocar uma coluna nova, que puxe no banco de dados o tipo de usuario,
+        //Verificando se ele é padrao, vistante ou ldap.
+
         /*
         echo $metodo_autenticacao.'-'.$perfil.'<br>';
         if($metodo_autenticacao == 'padrao'){
@@ -34,7 +37,6 @@ class AutenticacaoMiddleware
         }else{
             echo 'Carregar o pefil do banco de dados';
         }
-
         if (true){
             return $next($request);
         }else{

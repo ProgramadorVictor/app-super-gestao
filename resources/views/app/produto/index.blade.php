@@ -36,10 +36,23 @@
                             <td>{{$produto->descricao}}</td>
                             <td>{{$produto->peso}}</td>
                             <td>{{$produto->unidade_id}}</td>
+                            <td><a href="{{route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                             {{-- PASSSANDO DOIS, PARAMETROS PARA A ROTA. --}}
-                            <td><a href="">Excluir</a></td>
+                            <td>
+                                {{-- ISSO AQUI É MUITO IMPORTANTE PRESTA ATENÇÃO --}}
+                                {{-- O FORMULARIO COM ESSA NOMEAÇÃO PODEMOS TER VÁRIOS FORMULÁRIOS. --}}
+                                <form id="form_{{$produto->id}}" action="{{route('produto.destroy', ['produto' => $produto->id])}}" method="post">
+                                    @method('delete')
+                                    {{-- VER O VERBO EM php artisan route:list , o método delete pertecen a route:resource e temos que mudar se não, fica bem dificil do laravel entender --}}
+                                    @csrf
+                                    {{-- DIRECIONAMOS PARA A ROTA COM O VERBO DELETE --}}
+                                    {{-- <button type="submit">Excluir</button> --}}
+                                    <a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a>
+                                    {{-- SE NÃO ESTIVER NADA NO <a href=""></a> dessa maneira o código vai recarregar a página precisa pelo menos ter uma hashtag  --}}
+                                </form>
+                            </td>
                             {{-- EM EDITAR, PASSAMOS UM PARAMETRO PARA IDENTIFICAR QUAL O FORNECEDOR ESTAMOS EDITANDO--}}
-                            <td><a href="">Editar</a></td>
+                            <td><a href="{{route('produto.edit', ['produto' => $produto->id]) }}">Editar</a></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -36,6 +36,7 @@
                             <td><?php echo e($produto->descricao); ?></td>
                             <td><?php echo e($produto->peso); ?></td>
                             <td><?php echo e($produto->unidade_id); ?></td>
+                            <td><a href="<?php echo e(route('produto.show', ['produto' => $produto->id] )); ?>">Visualizar</a></td>
                             
                             <td><a href="">Excluir</a></td>
                             

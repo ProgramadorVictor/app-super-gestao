@@ -7,7 +7,7 @@ use App\Http\Middleware\LogAcessoMiddleware;
 
 class SobreNosController extends Controller
 {
-    public function __construct(){
+    public function __construct(){ //Verificar como funciona isso.
         $this->middleware('log.acesso'); //Pode ser usado aqui  //Mais um modo de como podemos usar a middleware.
     }
     //Construtor do controlador é a primeira coisa a ser executada, isso aqui foi um exemplo de middleware no controlador.
