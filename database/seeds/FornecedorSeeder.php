@@ -39,7 +39,7 @@ class FornecedorSeeder extends Seeder
         //SEEDER CRIADO POR MIM
         //MELHOR COMANDO PARA APAGAR E FAZER OS REGISTROS DE NOVO E ALIMENTAR O BANCO DE DADOS. 'php artisan migrate:refresh --seed'
         $numero = 0;
-        for($i = 0; $i < 125; $i++){
+        for($i = 0; $i < 50; $i++){
             $fornecedor = new Fornecedor();
             $numero = $numero+100;
             $fornecedor->nome = "Fornecedor {$numero}";

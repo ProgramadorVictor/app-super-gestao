@@ -25,6 +25,10 @@
                         <th>Descrição</th>
                         <th>Peso</th>
                         <th>Unidade ID</th>
+                        <th>Comprimento</th>
+                        <th>Altura</th>
+                        <th>Largura</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -33,9 +37,13 @@
                     <?php $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo e($produto->nome); ?></td>
-                            <td><?php echo e($produto->descricao); ?></td>
+                            
+                            <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;"><?php echo e($produto->descricao); ?></td>
                             <td><?php echo e($produto->peso); ?></td>
                             <td><?php echo e($produto->unidade_id); ?></td>
+                            <td><?php echo e($produto->comprimento ?? ''); ?></td>
+                            <td><?php echo e($produto->altura ?? ''); ?></td>
+                            <td><?php echo e($produto->largura ?? ''); ?></td>
                             <td><a href="<?php echo e(route('produto.show', ['produto' => $produto->id])); ?>">Visualizar</a></td>
                             
                             <td>

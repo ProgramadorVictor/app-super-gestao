@@ -48,6 +48,7 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     //Esse tipo de rota somente pode ser usado 'Route::resource' caso usamos o comando 'php artisan make:controller --resource ProdutoController --model=Produto
     //Ele automaticamente da a existência dessas rotas. Com os métodos. (Utilizar ao invés de criar várias rotas na mão)
     // Route::get('/produto', 'ProdutoController@index')->name('app.produto'); //Para atribuir nomes a rotas do tipo resource, o rota deve esta abaixo da resouce, com o nome.
+    Route::resource('produto-detalhe','ProdutoDetalheController');
 });
 
 Route::fallback(function() {

@@ -17,6 +17,8 @@ use Illuminate\Support\Str;
 |
 */
 
+
+// Definição de factory podemos, ver as outras coisas que fazem, olhando a biblioteca de faker.
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,

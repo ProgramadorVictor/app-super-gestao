@@ -1,3 +1,5 @@
+{{-- <a href="file:///D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views\app\produto\create.blade.php">AQUI UTILIZAMOS D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views\app\fornecedor\adicionar.blade.php</a> --}}
+{{-- ACIMA USAMOS COMPONENTE, DIFERENTE DAQUI --}}
 @extends('app.layouts.basico')
 
 @section('titulo', 'Fornecedor')

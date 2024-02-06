@@ -1,5 +1,8 @@
 
 
+
+
+
 <?php $__env->startSection('titulo', 'Produto'); ?>
 
 <?php $__env->startSection('conteudo'); ?>
@@ -16,32 +19,14 @@
     </div>
     <div class="informacao-pagina">
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
-            <form autocomplete="off" method="post" action="<?php echo e(route('produto.update', ['produto' => $produto->id] )); ?>">
-                <?php echo csrf_field(); ?>
-                
-                <?php echo method_field('put'); ?>
-                <input type="text" name="nome" placeholder="Nome" value="<?php echo e($produto->nome ?? old('nome')); ?>" class="borda-preta">
-                <?php echo e($errors->has('nome') ? $errors->first('nome') : ''); ?>
-
-                
-                
-                <input type="text" name="descricao" placeholder="Descrição" value="<?php echo e($produto->descricao ?? old('descricao')); ?>" class="borda-preta">
-                <?php echo e($errors->has('descricao') ? $errors->first('descricao') : ''); ?>
-
-                <input type="text" name="peso" placeholder="Peso" value="<?php echo e($produto->peso ?? old('peso')); ?>" class="borda-preta">
-                <?php echo e($errors->has('peso') ? $errors->first('peso') : ''); ?>
-
-                <select name="unidade_id" id="">
-                    <option>Selecione a unidade de medida</option>
-                    <?php $__currentLoopData = $unidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $unidade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <option value="<?php echo e($unidade->id); ?>" <?php echo e($produto->unidade_id ?? old('unidade_id') == $unidade->id ? 'selected' : ''); ?>><?php echo e($unidade->descricao); ?></option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </select>
-                <?php echo e($errors->has('unidade_id') ? $errors->first('unidade_id') : ''); ?>
-
-                <button type="submit" class="borda-preta">Editar</button>
-                
-            </form>
+            
+            <?php $__env->startComponent('app.produto._componentes.form_create_edit', ['unidades' => $unidades, 'produto' => $produto]); ?>
+            <?php if (isset($__componentOriginal699341accc5974947d1161f71a2704f75eaaead5)): ?>
+<?php $component = $__componentOriginal699341accc5974947d1161f71a2704f75eaaead5; ?>
+<?php unset($__componentOriginal699341accc5974947d1161f71a2704f75eaaead5); ?>
+<?php endif; ?>
+<?php echo $__env->renderComponent(); ?>
+            
         </div>
     </div>
 </div>
