@@ -41,9 +41,9 @@
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;"><?php echo e($produto->descricao); ?></td>
                             <td><?php echo e($produto->peso); ?></td>
                             <td><?php echo e($produto->unidade_id); ?></td>
-                            <td><?php echo e($produto->comprimento ?? ''); ?></td>
-                            <td><?php echo e($produto->altura ?? ''); ?></td>
-                            <td><?php echo e($produto->largura ?? ''); ?></td>
+                            <td><?php echo e($produto->produtoDetalhe->comprimento ?? ''); ?></td>
+                            <td><?php echo e($produto->produtoDetalhe->altura ?? ''); ?></td> 
+                            <td><?php echo e($produto->produtoDetalhe->largura ?? ''); ?></td>
                             <td><a href="<?php echo e(route('produto.show', ['produto' => $produto->id])); ?>">Visualizar</a></td>
                             
                             <td>

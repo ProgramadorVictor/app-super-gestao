@@ -17,6 +17,10 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        <h4>Produto</h4>
+        <div>Nome: <?php echo e($produto_detalhe->produto->nome); ?></div>
+        <br>
+        <div>Descrição: <?php echo e($produto_detalhe->produto->descricao); ?> </div>
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             
             <?php $__env->startComponent('app.produto_detalhe._componentes.form_create_edit', ['unidades' => $unidades, 'produto_detalhe' => $produto_detalhe]); ?>

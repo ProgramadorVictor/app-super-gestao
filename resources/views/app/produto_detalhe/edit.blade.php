@@ -17,6 +17,11 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        <h4>Produto</h4>
+        <div>Nome: {{$produto_detalhe->produto->nome}}</div>
+        <br>
+        <div>Descrição: {{$produto_detalhe->produto->descricao}} </div>
+        {{-- RELACIONAMENTO DE 1, PARA 1, --}}
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             {{-- TRANSFORMEI EM UM COMPONENENTE E ESTOU USANDO PARA DUAS VIEWS. --}}
             @component('app.produto_detalhe._componentes.form_create_edit', ['unidades' => $unidades, 'produto_detalhe' => $produto_detalhe])

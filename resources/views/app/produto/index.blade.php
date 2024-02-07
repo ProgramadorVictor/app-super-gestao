@@ -41,9 +41,9 @@
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;">{{$produto->descricao}}</td>
                             <td>{{$produto->peso}}</td>
                             <td>{{$produto->unidade_id}}</td>
-                            <td>{{$produto->comprimento ?? ''}}</td>
-                            <td>{{$produto->altura ?? ''}}</td>
-                            <td>{{$produto->largura ?? ''}}</td>
+                            <td>{{$produto->produtoDetalhe->comprimento ?? ''}}</td>
+                            <td>{{$produto->produtoDetalhe->altura ?? ''}}</td> 
+                            <td>{{$produto->produtoDetalhe->largura ?? ''}}</td>
                             <td><a href="{{route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                             {{-- PASSSANDO DOIS, PARAMETROS PARA A ROTA. --}}
                             <td>
