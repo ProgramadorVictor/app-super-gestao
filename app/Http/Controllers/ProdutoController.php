@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Produto;
 use App\ProdutoDetalhe;
 use App\Unidade;
+use App\Item;
 
 
 class ProdutoController extends Controller
@@ -16,9 +17,15 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //Lazy Loading e Eager Loading //MOVIDO PARA A PAGINA INDEX ESTÁ ESCRITO LÁ (Eager Loading é no próprio método)
+    //Carregamento lento e carregamento ansioso
     public function index(Request $req) 
     {
-        $produtos = Produto::paginate(10);
+        // $produtos = Produto::paginate(10); //Anteriormente usando com nomes padronizados
+        // $produtos = Item::paginate(10); 
+        // $produtos = Item::with('itemDetalhe','rel2','rel3')->paginate(10); //Esatamos fazendo o carregamento ansioso, Eager Loading  //Cada parametro passado acima, com with, para o carregamento ansioso, representa um método. //Sendo possivel ser breaviamente carregao todos os relacionamentos.
+        $produtos = Item::with('itemDetalhe')->paginate(10);
+
         //Paginate, para organizar melhor os dados de registro da página.
         //$key é o indice do foreach
 

@@ -15,6 +15,8 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        
+        
         <div style="width: 90%; margin-left: auto; margin-right:auto;">
             
             <table border="1" width ="100%"> 
@@ -41,9 +43,9 @@
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;"><?php echo e($produto->descricao); ?></td>
                             <td><?php echo e($produto->peso); ?></td>
                             <td><?php echo e($produto->unidade_id); ?></td>
-                            <td><?php echo e($produto->produtoDetalhe->comprimento ?? ''); ?></td>
-                            <td><?php echo e($produto->produtoDetalhe->altura ?? ''); ?></td> 
-                            <td><?php echo e($produto->produtoDetalhe->largura ?? ''); ?></td>
+                            <td><?php echo e($produto->itemDetalhe->comprimento ?? ''); ?></td>
+                            <td><?php echo e($produto->itemDetalhe->altura ?? ''); ?></td> 
+                            <td><?php echo e($produto->itemDetalhe->largura ?? ''); ?></td>
                             <td><a href="<?php echo e(route('produto.show', ['produto' => $produto->id])); ?>">Visualizar</a></td>
                             
                             <td>
@@ -65,6 +67,9 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>
+            
+            
+
             
             
             

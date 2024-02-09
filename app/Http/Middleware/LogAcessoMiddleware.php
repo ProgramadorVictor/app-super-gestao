@@ -17,7 +17,6 @@ class LogAcessoMiddleware
     public function handle($request, Closure $next)
     {
         //$request podemos manipular o $request se os dados forem atendidos direcionamos para o proximo passo lógico.
-        //dd($request);
         $ip = $request->server->get('REMOTE_ADDR'); //É atributo por isso que usamos como parametro no get()
         $rota = $request->getRequestUri(); //Não é atributo por isso não puxamos como parametro
         LogAcesso::create(['log' => "IP: $ip requisitou a rota $rota"]); //Adicionando no banco de dados.

@@ -15,6 +15,8 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        {{-- {{$produtos->toJson()}} --}}
+        {{-- ISSO SE CHAMA LAZY LOADING E EAGER LOADING, QUANDO VOCÊ TRAZ OS REGISTROS E VERIFICA COM TOJSON--}}
         <div style="width: 90%; margin-left: auto; margin-right:auto;">
             {{-- LISTA --}}
             <table border="1" width ="100%"> {{-- ADICIONANDO BORDAR E MODIFICANDO A LARGURA  --}}
@@ -41,9 +43,9 @@
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;">{{$produto->descricao}}</td>
                             <td>{{$produto->peso}}</td>
                             <td>{{$produto->unidade_id}}</td>
-                            <td>{{$produto->produtoDetalhe->comprimento ?? ''}}</td>
-                            <td>{{$produto->produtoDetalhe->altura ?? ''}}</td> 
-                            <td>{{$produto->produtoDetalhe->largura ?? ''}}</td>
+                            <td>{{$produto->itemDetalhe->comprimento ?? ''}}</td>
+                            <td>{{$produto->itemDetalhe->altura ?? ''}}</td> 
+                            <td>{{$produto->itemDetalhe->largura ?? ''}}</td>
                             <td><a href="{{route('produto.show', ['produto' => $produto->id]) }}">Visualizar</a></td>
                             {{-- PASSSANDO DOIS, PARAMETROS PARA A ROTA. --}}
                             <td>
@@ -65,6 +67,9 @@
                     @endforeach
                 </tbody>
             </table>
+            {{-- APÓS CHAMAR UMA ÚNICA VEZ O MÉTODO É O CARREGAMENTO LENTO LAZY LOADING, ELA TRAZ AS INFORMAÇÕES DO BANCO DE DADOS RELACIONADAS, AS RELAÇÕES --}}
+            {{-- {{$produtos->toJson()}}  --}}
+
             {{-- UTILIZAMOS O MÉTODO DE PAGINATE PARA FAZER A PAGINAÇÃO DA LISTA, AGORA TEMOS A PAGINAÇÃO E PODEMOS VER COM '$fornecedores->links()' --}}
             {{-- {{$fornecedores->links()}} --}}
             {{-- AO INVÉS DE USAR ISSO ACIMA, RESOLUÇÃO DO PROBLEMA ABAIXO, NO QUAL AO CLICA EM UM PAGINATE AS QUERYS SÃO RESETADAS --}}

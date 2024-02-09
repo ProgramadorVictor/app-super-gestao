@@ -17,10 +17,16 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        <?php echo e($produto_detalhe->toJson()); ?>
+
         <h4>Produto</h4>
-        <div>Nome: <?php echo e($produto_detalhe->produto->nome); ?></div>
+        
+        
+        
+        <div>Nome: <?php echo e($produto_detalhe->item->nome); ?></div>
         <br>
-        <div>Descrição: <?php echo e($produto_detalhe->produto->descricao); ?> </div>
+        <div>Descrição: <?php echo e($produto_detalhe->item->descricao); ?> </div>
+        
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             
             <?php $__env->startComponent('app.produto_detalhe._componentes.form_create_edit', ['unidades' => $unidades, 'produto_detalhe' => $produto_detalhe]); ?>
@@ -31,6 +37,8 @@
 <?php echo $__env->renderComponent(); ?>
             
         </div>
+        <?php echo e($produto_detalhe->toJson()); ?>
+
     </div>
 </div>
 <?php $__env->stopSection(); ?>

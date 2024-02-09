@@ -17,10 +17,17 @@
         </ul>
     </div>
     <div class="informacao-pagina">
+        {{-- {{$produto_detalhe->toJson()}} --}}
+        {{-- ACIMA É O USO DE LAZY LOANDING OU EAGER LOANDING --}}
         <h4>Produto</h4>
-        <div>Nome: {{$produto_detalhe->produto->nome}}</div>
+        {{-- O QUE ESTÁ COMENTADO É QUE EU ESTAVA USANDO ANTERIORMENTE COM O NOME PADRONIZADO --}}
+        {{-- <div>Nome: {{$produto_detalhe->produto->nome}}</div>
         <br>
-        <div>Descrição: {{$produto_detalhe->produto->descricao}} </div>
+        <div>Descrição: {{$produto_detalhe->produto->descricao}} </div> --}}
+        {{-- O nome entre as relações dos bancos tem que ser o nome do método da model, acima era anteriormente usando o produtoDetalhem, abaixo eu usei o ItemDetalhe --}}
+        <div>Nome: {{$produto_detalhe->item->nome}}</div>
+        <br>
+        <div>Descrição: {{$produto_detalhe->item->descricao}} </div>
         {{-- RELACIONAMENTO DE 1, PARA 1, --}}
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             {{-- TRANSFORMEI EM UM COMPONENENTE E ESTOU USANDO PARA DUAS VIEWS. --}}
@@ -28,6 +35,7 @@
             @endcomponent
             {{-- PASSANDO OS PARAMETRO PARA OS COMPONENTE --}}
         </div>
+        {{$produto_detalhe->toJson()}}
     </div>
 </div>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
+use App\ItemDetalhe;
 
 class ProdutoDetalheController extends Controller
 {
@@ -41,8 +42,6 @@ class ProdutoDetalheController extends Controller
         //     'nome' => 'required',
         // ];
         // $feedback = [
-
- 
         // ];
         ProdutoDetalhe::create($request->all());
         echo "Teste";
@@ -58,12 +57,15 @@ class ProdutoDetalheController extends Controller
     {
         //
     }
-
+// * @param  App\ProdutoDetalhe $produtoDetalhe
     /**
+    //  * QUE É INTERTEGER ELE ESCREVEU NA AULA? NÃO SERIA INTEGER?
      * Show the form for editing the specified resource.
+     * 
      *
-     * @param  App\ProdutoDetalhe $produtoDetalhe
+     * @param Interteger $id
      * @return \Illuminate\Http\Response
+     // O parametro também deve ser mudado de nome para podemos usar corretamente.
      */
     // public function edit($id)
     // {
@@ -72,9 +74,22 @@ class ProdutoDetalheController extends Controller
     //Ao invés de receber um id, vamos receber um objeto do tipo ProdutoDetalhe
     //O nome do Objeto ProdutoDetalhe tem que ser igual ao da model, para trazermos o objeto.
     //A variavel e o objeto tem que ter o mesmo nome da model.
-    public function edit(ProdutoDetalhe $produtoDetalhe)
+    public function edit($id)
+    
+    // public function edit(ProdutoDetalhe $produtoDetalhe) // dd($produtoDetalhe->produto->nome); Assim que usamos usando o Model ProdutoDetalhe
+    //Anteriormente estava ProdutoDetalhe $produtoDetalhe no parametro, podemos usar dessa maneira também passando o $id do produto, porém acredito que seria melhor usando o objeto $produtoDetalhe
     {
-        $unidades = Unidade::all();
+        //A diferença usando Model ProdutoDetalhe para ItemDetalhe
+        //ProdutoDetalhe usamos nomes padranizados
+        //ItemDetalhe usamos nomes não padraonizados, por isso usamos o $id para buscandos no na model, que busca no banco o $id com o mesmo registro no banco de dados.
+        $produtoDetalhe = ItemDetalhe::with('item')->find($id);
+        $unidades = Unidade::all(); 
+        // dd($produtoDetalhe->load('item')); //Aqui estamos entrando na model ItemDetalhe e vendo a conexão da função item, aqui podemos ver todo o necessário para a relação das tabelas até as relações que estão fazendo
+        //Muito interessante isso estou aprendendo bem, preciso praticar.
+        // dd($produtoDetalhe->item()->getRelation('produtoDetalhe')); //Aqui praticamente a mesma coisa, mostra as tabelas. Comentário abaixo
+        //´Porém estou acessando ItemDetalhe, acessando a função item(), e dentro da função item estou buscando o relacionamento com o nome da outra função que esta em outra model relacionada.
+        // dd($produtoDetalhe->item()); //Dentre esses comandos eu prefiro esse mostra todas as relações, atributos, esse é o melhor comando, somente acessando a função item na model.
+        // dd($produtoDetalhe->item->nome); //Aqui você acessa os atributos da outra tabela relacionada.
         return view('app.produto_detalhe.edit', ['produto_detalhe' => $produtoDetalhe, 'unidades' => $unidades]);
     }
 
