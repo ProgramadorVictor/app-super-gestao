@@ -26,7 +26,6 @@
                         <th>UF</th>
                         <th>E-mail</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +39,27 @@
                             <td><a href="<?php echo e(route('app.fornecedor.excluir', $fornecedor->id)); ?>">Excluir</a></td>
                             
                             <td><a href="<?php echo e(route('app.fornecedor.editar', $fornecedor->id)); ?>">Editar</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p>Lista de produtos</p>
+                                <table border="1" style="margin:20px;">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Nome</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $__currentLoopData = $fornecedor->produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                            <td><?php echo e($produto->id); ?></td>
+                                            <td><?php echo e($produto->nome); ?></td>
+                                        </tr>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </tbody>
+                                </table>
+                            </td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

@@ -24,7 +24,7 @@ class ProdutoController extends Controller
         // $produtos = Produto::paginate(10); //Anteriormente usando com nomes padronizados
         // $produtos = Item::paginate(10); 
         // $produtos = Item::with('itemDetalhe','rel2','rel3')->paginate(10); //Esatamos fazendo o carregamento ansioso, Eager Loading  //Cada parametro passado acima, com with, para o carregamento ansioso, representa um método. //Sendo possivel ser breaviamente carregao todos os relacionamentos.
-        $produtos = Item::with('itemDetalhe')->paginate(10);
+        $produtos = Item::with('itemDetalhe','fornecedor')->paginate(10);
 
         //Paginate, para organizar melhor os dados de registro da página.
         //$key é o indice do foreach

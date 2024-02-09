@@ -17,8 +17,8 @@
         </ul>
     </div>
     <div class="informacao-pagina">
-        <?php echo e($produto_detalhe->toJson()); ?>
-
+        
+        
         <h4>Produto</h4>
         
         

@@ -25,6 +25,8 @@
                     <tr>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th>Nome do Fornecedor</th>
+                        <th>Site do Fornecedor</th>
                         <th>Peso</th>
                         <th>Unidade ID</th>
                         <th>Comprimento</th>
@@ -41,6 +43,8 @@
                             <td>{{$produto->nome}}</td>
                             {{-- ESSE ESTILO ABAIXO, FOI EU QUE FIZ PARA NÃO QUEBRA LINHA. --}}
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;">{{$produto->descricao}}</td>
+                            <td>{{$produto->fornecedor->nome}}</td>
+                            <td>{{$produto->fornecedor->site}}</td>
                             <td>{{$produto->peso}}</td>
                             <td>{{$produto->unidade_id}}</td>
                             <td>{{$produto->itemDetalhe->comprimento ?? ''}}</td>

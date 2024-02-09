@@ -25,6 +25,8 @@
                     <tr>
                         <th>Nome</th>
                         <th>Descrição</th>
+                        <th>Nome do Fornecedor</th>
+                        <th>Site do Fornecedor</th>
                         <th>Peso</th>
                         <th>Unidade ID</th>
                         <th>Comprimento</th>
@@ -41,6 +43,8 @@
                             <td><?php echo e($produto->nome); ?></td>
                             
                             <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;"><?php echo e($produto->descricao); ?></td>
+                            <td><?php echo e($produto->fornecedor->nome); ?></td>
+                            <td><?php echo e($produto->fornecedor->site); ?></td>
                             <td><?php echo e($produto->peso); ?></td>
                             <td><?php echo e($produto->unidade_id); ?></td>
                             <td><?php echo e($produto->itemDetalhe->comprimento ?? ''); ?></td>
