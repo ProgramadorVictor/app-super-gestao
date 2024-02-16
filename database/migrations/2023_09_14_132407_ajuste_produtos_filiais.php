@@ -40,7 +40,6 @@ class AjusteProdutosFiliais extends Migration
         //removendo a coluna da tabela produtos
         Schema::table('produtos', function(Blueprint $table){
             $table->dropColumn(['preco_venda', 'estoque_minimo','estoque_maximo']);
-
         });
     }
 

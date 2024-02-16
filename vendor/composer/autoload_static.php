@@ -459,6 +459,7 @@ class ComposerStaticInit250a5e2be7e275541a96b206c994f437
     );
 
     public static $classMap = array (
+        'App\\Cliente' => __DIR__ . '/../..' . '/app/Cliente.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Fornecedor' => __DIR__ . '/../..' . '/app/Fornecedor.php',
@@ -488,6 +489,8 @@ class ComposerStaticInit250a5e2be7e275541a96b206c994f437
         'App\\ItemDetalhe' => __DIR__ . '/../..' . '/app/ItemDetalhe.php',
         'App\\LogAcesso' => __DIR__ . '/../..' . '/app/LogAcesso.php',
         'App\\MotivoContato' => __DIR__ . '/../..' . '/app/MotivoContato.php',
+        'App\\Pedido' => __DIR__ . '/../..' . '/app/Pedido.php',
+        'App\\PedidoProduto' => __DIR__ . '/../..' . '/app/PedidoProduto.php',
         'App\\Produto' => __DIR__ . '/../..' . '/app/Produto.php',
         'App\\ProdutoDetalhe' => __DIR__ . '/../..' . '/app/ProdutoDetalhe.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

@@ -20,7 +20,7 @@
     <div class="informacao-pagina">
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             {{-- TRANSFORMEI EM UM COMPONENENTE E ESTOU USANDO PARA DUAS VIEWS. --}}
-            @component('app.produto._componentes.form_create_edit', ['unidades' => $unidades, 'produto' => $produto])
+            @component('app.produto._componentes.form_create_edit', ['unidades' => $unidades, 'produto' => $produto, 'fornecedores' => $fornecedores])
             @endcomponent
             {{-- PASSANDO OS PARAMETRO PARA OS COMPONENTE --}}
         </div>

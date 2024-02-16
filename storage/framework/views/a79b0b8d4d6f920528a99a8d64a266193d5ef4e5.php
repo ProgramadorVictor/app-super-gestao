@@ -8,6 +8,15 @@
         <form autocomplete="off" method="post" action="<?php echo e(route('produto.store')); ?>">
         <?php echo csrf_field(); ?> 
     <?php endif; ?>
+            <select name="fornecedor_id" id="">
+                <option>Selecione o fornecedor</option>
+                <?php $__currentLoopData = $fornecedores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $fornecedor): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <option value="<?php echo e($fornecedor->id); ?>" <?php echo e(($produto->fornecedor_id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : ''); ?>><?php echo e($fornecedor->nome); ?></option>
+                    
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
+            <?php echo e($errors->has('fornecedor_id') ? $errors->first('fornecedor_id') : ''); ?>
+
             <input type="text" name="nome" placeholder="Nome" value="<?php echo e($produto->nome ?? old('nome')); ?>" class="borda-preta">
             <?php echo e($errors->has('nome') ? $errors->first('nome') : ''); ?>
 

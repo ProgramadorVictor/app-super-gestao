@@ -33,5 +33,23 @@ class ProdutoSeeder extends Seeder
         $produto->peso = 1;
         $produto->unidade_id = 1;
         $produto->save();
+        $produto = new Produto();
+        $produto->nome = "Nuka Cola";
+        $produto->descricao = "Do Fallout para o mundo.";
+        $produto->peso = 1;
+        $produto->unidade_id = 1;
+        $produto->save();
+        $produto = new Produto();
+        $produto->nome = "Vodka";
+        $produto->descricao = "Puro álcool";
+        $produto->peso = 1;
+        $produto->unidade_id = 1;
+        $produto->save();
+        $produto = new Produto();
+        $produto->nome = "Qualquer Coisa";
+        $produto->descricao = "Um bebida qualquer";
+        $produto->peso = 1;
+        $produto->unidade_id = 1;
+        $produto->save();
     }
 }

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Cliente' => $baseDir . '/app/Cliente.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Fornecedor' => $baseDir . '/app/Fornecedor.php',
@@ -35,6 +36,8 @@ return array(
     'App\\ItemDetalhe' => $baseDir . '/app/ItemDetalhe.php',
     'App\\LogAcesso' => $baseDir . '/app/LogAcesso.php',
     'App\\MotivoContato' => $baseDir . '/app/MotivoContato.php',
+    'App\\Pedido' => $baseDir . '/app/Pedido.php',
+    'App\\PedidoProduto' => $baseDir . '/app/PedidoProduto.php',
     'App\\Produto' => $baseDir . '/app/Produto.php',
     'App\\ProdutoDetalhe' => $baseDir . '/app/ProdutoDetalhe.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

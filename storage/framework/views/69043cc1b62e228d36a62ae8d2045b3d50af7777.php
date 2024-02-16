@@ -20,7 +20,7 @@
     <div class="informacao-pagina">
         <div style="width: 30%; margin-left: auto; margin-right:auto;">
             
-            <?php $__env->startComponent('app.produto._componentes.form_create_edit', ['unidades' => $unidades, 'produto' => $produto]); ?>
+            <?php $__env->startComponent('app.produto._componentes.form_create_edit', ['unidades' => $unidades, 'produto' => $produto, 'fornecedores' => $fornecedores]); ?>
             <?php if (isset($__componentOriginal699341accc5974947d1161f71a2704f75eaaead5)): ?>
 <?php $component = $__componentOriginal699341accc5974947d1161f71a2704f75eaaead5; ?>
 <?php unset($__componentOriginal699341accc5974947d1161f71a2704f75eaaead5); ?>

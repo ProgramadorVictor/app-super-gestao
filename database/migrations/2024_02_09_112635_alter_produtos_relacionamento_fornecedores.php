@@ -35,7 +35,9 @@ class AlterProdutosRelacionamentoFornecedores extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('produtos');
+        Schema::enableForeignKeyConstraints();
         // Schema::table('produtos',function (Blueprint $table){
         //Ou pode fazer dessa maneira
         //$table->dropForeign('produtos_forenecedor_id_foreign');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $table = 'produtos';
-    protected $fillable = ['nome','descricao','peso','unidade_id'];
+    protected $fillable = ['nome','descricao','peso','unidade_id','fornecedor_id'];
     public function itemDetalhe(){ //produto_id é a foreign de ItemDetalhe
         return $this->hasOne('App\ItemDetalhe','produto_id','id'); //, 'Aqui passamos o nome da coluna que guarda a foreign' e o terceiro parametro 'É a chave primaria normalmente é id'
     } //Relacionamento de 1 para 1.
