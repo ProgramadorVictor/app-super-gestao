@@ -16,6 +16,7 @@ class AutenticacaoMiddleware
     public function handle($request, Closure $next, $metodo_autenticacao, $perfil)
     {
         session_start();
+        //Super global session ^
         if(isset($_SESSION['email']) && $_SESSION['email'] != ''){
             return $next($request);
         }else{
