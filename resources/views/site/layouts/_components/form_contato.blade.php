@@ -34,7 +34,7 @@
     </select>
     {{$errors->has('motivo_contatos_id') ? $errors->first('motivo_contatos_id') : ""}}
     <br>
-    <textarea name="mensagem" value = {{old('mensagem')}} class="{{$classe}}"> @if (old('mensagem') != '') {{old('mensagem')}} @else Preencha aqui a sua mensagem @endif </textarea>
+    <textarea name="mensagem" value="{{old('mensagem')}}" class="{{$classe}}"> @if (old('mensagem') != '') {{old('mensagem')}} @else Preencha aqui a sua mensagem @endif </textarea>
     {{$errors->has('mensagem') ? $errors->first('mensagem') : ""}}
     {{-- Caso ocorra algum espaço é necessário, colocar todos eles em uma única linha, é uma das opções--}}
     

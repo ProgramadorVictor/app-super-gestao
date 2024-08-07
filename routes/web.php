@@ -37,9 +37,9 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     //A rota acima 'app.fornecedor' ela é uma wildcard, provavel se estiver em cima acontecer problemas de roteamento, entender melhor isso.
 
     //ProdutoController foi feito com php artisan make:controller ProdutoController -r
-    Route::get('/produto/create', 'ProdutoController@create')->name('app.produto.create');
+    // Route::get('/produto/create', 'ProdutoController@create')->name('app.produto.create');
     Route::resource('produto','ProdutoController'); //php artisan make:controller --resource ProdutoController --model=Produto
-    //SOBRE RESOURC, OBSERVE BEM OS MÉTODOS ELES SÃO MUITO CHATINHOS E RIGOROSOS, PRINCIPALEMENTE DELETE, TEM QUE MONTAR FORM, PARA DELETAR UM OBJETO DO BANCO DE DADOS 
+    //SOBRE RESOURCE, OBSERVE BEM OS MÉTODOS ELES SÃO MUITO CHATINHOS E RIGOROSOS, PRINCIPALEMENTE DELETE, TEM QUE MONTAR FORM, PARA DELETAR UM OBJETO DO BANCO DE DADOS 
     //Métodos HTTP: put e patch
     //Put: Quando usamos o put, quando solicitamos uma requisição http, deve potencialmente modificar uma entidade por completo. Os dados que são trafegados são o objeto completo que serão modificados.
     //Patch: É utilizado para modificações parciais de uma entidade, ou seja, alguns atributos especificos dos objetos.

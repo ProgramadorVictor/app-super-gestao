@@ -12,44 +12,30 @@ class ProdutoSeeder extends Seeder
      */
     public function run()
     {
-        // for($i = 1; $i < (50+1); $i++){
-        //     $produto = new Produto();
-        //     $produto->nome = "Produto {$i}";
-        //     $produto->descricao = "";
-        //     $produto->peso = $i;
-        //     $produto->unidade_id= [1,2,3][rand(0,2)];
-        //     $produto->save();
-        // }
-        //Isso não tem no curso fiz, pois uso muito o php artisan migrate:fresh
-        $produto = new Produto();
-        $produto->nome = "Coca Cola";
-        $produto->descricao = "Um refrigerante que mata a sede e você também";
-        $produto->peso = 1;
-        $produto->unidade_id = 1;
-        $produto->save();
-        $produto = new Produto();
-        $produto->nome = "Pepsi";
-        $produto->descricao = "Um refrigerante que mata você e sua sede.";
-        $produto->peso = 1;
-        $produto->unidade_id = 1;
-        $produto->save();
-        $produto = new Produto();
-        $produto->nome = "Nuka Cola";
-        $produto->descricao = "Do Fallout para o mundo.";
-        $produto->peso = 1;
-        $produto->unidade_id = 1;
-        $produto->save();
-        $produto = new Produto();
-        $produto->nome = "Vodka";
-        $produto->descricao = "Puro álcool";
-        $produto->peso = 1;
-        $produto->unidade_id = 1;
-        $produto->save();
-        $produto = new Produto();
-        $produto->nome = "Qualquer Coisa";
-        $produto->descricao = "Um bebida qualquer";
-        $produto->peso = 1;
-        $produto->unidade_id = 1;
-        $produto->save();
+        $produtos = [
+            [
+                'nome' => 'Coca Cola',
+                'descricao' => 'Um refrigerante que mata a sede e você também',
+            ],
+            [
+                'nome' => 'Pepsi',
+                'descricao' => 'Um refrigerante que mata você e sua sede.',
+            ],
+            [
+                'nome' => 'Nuka Cola',
+                'descricao' => 'Do Fallout para o mundo.',
+            ],
+            [
+                'nome' => 'Vodka',
+                'descricao' => 'Puro álcool',
+            ],
+            [
+                'nome' => 'Qualquer Coisa',
+                'descricao' => 'Uma bebida qualquer',
+            ],
+        ];
+        foreach($produtos as $produto){
+            Produto::create(['nome' => $produto['nome'] , 'descricao' =>$produto['descricao'], 'peso' => rand(1,2), 'unidade_id' => 1]);
+        }
     }
 }

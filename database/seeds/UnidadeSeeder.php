@@ -12,10 +12,10 @@ class UnidadeSeeder extends Seeder
      */
     public function run()
     {
-        $opcoes = ['Bom', 'Ruim', 'Normal'];
-        for($i = 0; $i < 3; $i++){
+        $opcoes = ['Unidade'];
+        for($i = 0; $i < count($opcoes); $i++){
             $unidade = new Unidade();
-            $unidade->unidade = $i;
+            $unidade->unidade = ['UN','JP','US'][rand(0,2)];
             $unidade->descricao = $opcoes[$i];
             $unidade->save();
         }//Isso não tem no curso fiz, pois uso muito o php artisan migrate:fresh

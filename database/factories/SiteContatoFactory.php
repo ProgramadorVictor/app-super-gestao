@@ -11,7 +11,7 @@ $factory->define(SiteContato::class, function (Faker $faker) {
         'nome' => $faker->name,
         'telefone' => $faker->tollFreePhoneNumber,
         'email' => $faker->unique()->email, //unique() faz com que o email não pode se repetir.
-        'motivo_contatos_id' => $faker->numberBetween(1,4),
+        'motivo_contatos_id' => $faker->numberBetween(1,3),
         'mensagem' => $faker->text()  
     ];
 });

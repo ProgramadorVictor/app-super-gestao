@@ -12,12 +12,9 @@ class MotivoContatoSeeder extends Seeder
      */
     public function run()
     {
-        MotivoContato::create(['motivo_contato'=>'Dúvida']); //Método estático
-        MotivoContato::create(['motivo_contato'=>'Elogio']);
-        MotivoContato::create(['motivo_contato'=>'Reclamação']);
-
-        $inserir = new MotivoContato;
-        $inserir->motivo_contato = 'Elogio';
-        $inserir->save();
+        $motivo_contatos = ['Dúvida', 'Elogio', 'Reclamação'];
+        foreach($motivo_contatos as $motivo_contato){
+            MotivoContato::create(['motivo_contato' => $motivo_contato]);
+        }
     }
 }

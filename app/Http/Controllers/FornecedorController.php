@@ -14,12 +14,12 @@ class FornecedorController extends Controller
     public function listar(Request $req) {
 
         $fornecedores = Fornecedor::where('nome', 'like', '%'.$req->input('nome').'%')
-        ->where('site', 'like', '%'.$req->input('site').'%')
-        ->where('uf', 'like', '%'.$req->uf.'%')
-        ->where('email', 'like', '%'.$req->email.'%')
-        ->with('produtos')
-        ->paginate(15); //Utilização do paginate, funciona bem para organização de listagem de registros
-        //Estou mandado para a tela listar.blade.php e ai estou acessando por la
+                                    ->where('site', 'like', '%'.$req->input('site').'%')
+                                    ->where('uf', 'like', '%'.$req->uf.'%')
+                                    ->where('email', 'like', '%'.$req->email.'%')
+                                    ->with('produtos')  
+                                    ->paginate(10); //Utilização do paginate, funciona bem para organização de listagem de registros
+        //Estou mandado para a tela listar.blade.php e ai estou acessando por la    
         //ATENTO: Talvezz utilizar esse código em outro projeto com CSS, para quando fazer a movimentação passa de página.
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'req' => $req->all()]);
     }
@@ -69,11 +69,15 @@ class FornecedorController extends Controller
             $fornecedor = Fornecedor::find($req->id); //BUSCANDO PELO ID
             $update = $fornecedor->update($req->all());
             //Aqui é a saida se deu certo o registro é alterado com sucesso, se não o registro não é alterado.
-            if($update){ //Se ocorre o update, faz as mensagens de acordo para a views.
-                $msg = "Update realizado com sucesso";
-            }else{
-                $msg = "Update apresentou problemas";
-            }
+
+            // if($update){ //Se ocorre o update, faz as mensagens de acordo para a views.
+            //     $msg = "Update realizado com sucesso";
+            // }else{
+            //     $msg = "Update apresentou problemas";
+            // }
+
+            $update ? $msg = "Update realizado com sucesso" : $msg = "Update apresentou problemas";
+
             return redirect()->route('app.fornecedor.editar', ['id'=> $fornecedor->id, 'msg' => $msg, ]);
         }
         // print_r($req->all()); //Mostrando os dados do formulario com o _token
