@@ -26,7 +26,7 @@
             --}}
             <form autocomplete="off" method="post" action="{{route('app.fornecedor.adicionar')}}">
                 <input type="hidden" name="id" value="{{$fornecedor->id ?? ''}}">
-                @csrf
+                {{-- @csrf --}}
                 {{-- SE NÃO TIVER ESSA TAG COM O NAME ID, ELE NÃO SERÁ PASSADO PARA O $REQ DO CONTROLADOR E NÃO IRA SEGUIR A LOGICA DO CÓDIGO --}}
                 {{-- SE NÃO TEM O PARAMETRO ELE SEMPRE VAI ENTRA EM ADICIONAR SE TIVER O PARAMETRO PASSADO ELE VAI ENTRAR EM EDIÇÃO --}}
                 {{-- ISSO É MUITO IMPORTANTE, $FORNECEDOR->ID PASSA ANTES PELO METODO EDITAR E TRAS TODOS OS PARAMETROS PARA ESSA TELA. --}}

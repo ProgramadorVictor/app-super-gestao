@@ -44,7 +44,7 @@ class ProdutoDetalheController extends Controller
         // $feedback = [
         // ];
         ProdutoDetalhe::create($request->all());
-        echo "Teste";
+        echo "Cadastro realizado com sucesso";
     }
 
     /**
@@ -63,7 +63,7 @@ class ProdutoDetalheController extends Controller
      * Show the form for editing the specified resource.
      * 
      *
-     * @param Interteger $id
+     * @param int $id //Antes estave Interteger $id
      * @return \Illuminate\Http\Response
      // O parametro também deve ser mudado de nome para podemos usar corretamente.
      */
@@ -78,11 +78,14 @@ class ProdutoDetalheController extends Controller
     
     // public function edit(ProdutoDetalhe $produtoDetalhe) // dd($produtoDetalhe->produto->nome); Assim que usamos usando o Model ProdutoDetalhe
     //Anteriormente estava ProdutoDetalhe $produtoDetalhe no parametro, podemos usar dessa maneira também passando o $id do produto, porém acredito que seria melhor usando o objeto $produtoDetalhe
+    //Como mudamos a model para itemDetalhe tmb trocamos a model la em cima nos parametros da function
     {
         //A diferença usando Model ProdutoDetalhe para ItemDetalhe
         //ProdutoDetalhe usamos nomes padranizados
         //ItemDetalhe usamos nomes não padraonizados, por isso usamos o $id para buscandos no na model, que busca no banco o $id com o mesmo registro no banco de dados.
-        $produtoDetalhe = ItemDetalhe::with('item')->find($id);
+        $produtoDetalhe = ItemDetalhe::with('item')->find($id); //Eager Loading
+        // $produtoDetalhe = ItemDetalhe::find($id); //Lazy Loading
+
         $unidades = Unidade::all(); 
         // dd($produtoDetalhe->load('item')); //Aqui estamos entrando na model ItemDetalhe e vendo a conexão da função item, aqui podemos ver todo o necessário para a relação das tabelas até as relações que estão fazendo
         //Muito interessante isso estou aprendendo bem, preciso praticar.

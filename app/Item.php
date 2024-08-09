@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Item extends Model
 {
+    use SoftDeletes;
     protected $table = 'produtos';
     protected $fillable = ['nome','descricao','peso','unidade_id','fornecedor_id'];
     public function itemDetalhe(){ //produto_id é a foreign de ItemDetalhe

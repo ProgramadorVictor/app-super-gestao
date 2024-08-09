@@ -18,6 +18,7 @@
     </div>
     <div class="informacao-pagina">
         {{-- {{$produto_detalhe->toJson()}} --}}
+        {{-- {{$produto_detalhe->toJson()}} --}}
         {{-- ACIMA É O USO DE LAZY LOANDING OU EAGER LOANDING --}}
         <h4>Produto</h4>
         {{-- O QUE ESTÁ COMENTADO É QUE EU ESTAVA USANDO ANTERIORMENTE COM O NOME PADRONIZADO --}}
@@ -35,7 +36,7 @@
             @endcomponent
             {{-- PASSANDO OS PARAMETRO PARA OS COMPONENTE --}}
         </div>
-        {{$produto_detalhe->toJson()}}
+        {{-- {{$produto_detalhe->toJson()}} --}}
     </div>
 </div>
 @endsection

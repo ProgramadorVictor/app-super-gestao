@@ -26,6 +26,7 @@
                         <th>UF</th>
                         <th>E-mail</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

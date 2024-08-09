@@ -56,9 +56,9 @@
                                 
                                 
                                 <form id="form_<?php echo e($produto->id); ?>" action="<?php echo e(route('produto.destroy', ['produto' => $produto->id])); ?>" method="post">
+                                    <?php echo csrf_field(); ?>
                                     <?php echo method_field('delete'); ?>
                                     
-                                    <?php echo csrf_field(); ?>
                                     
                                     
                                     <a href="#" onclick="document.getElementById('form_<?php echo e($produto->id); ?>').submit()">Excluir</a>

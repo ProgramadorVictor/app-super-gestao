@@ -17,15 +17,21 @@ class FornecedorController extends Controller
                                     ->where('site', 'like', '%'.$req->input('site').'%')
                                     ->where('uf', 'like', '%'.$req->uf.'%')
                                     ->where('email', 'like', '%'.$req->email.'%')
-                                    ->with('produtos')  
+                                    ->with('produtos') //Usa with para carregar com eager loading
                                     ->paginate(10); //Utilização do paginate, funciona bem para organização de listagem de registros
         //Estou mandado para a tela listar.blade.php e ai estou acessando por la    
         //ATENTO: Talvezz utilizar esse código em outro projeto com CSS, para quando fazer a movimentação passa de página.
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'req' => $req->all()]);
     }
+    public function adc(){
+        $msg = '';
+        echo "a";
+        return view('app.fornecedor.adicionar', ['msg' => $msg]);
+    }
 
     public function adicionar(Request $req)
     {
+        // print_r("aq");
         $msg = '';
         $classe = '';
         $dados = [
@@ -35,7 +41,7 @@ class FornecedorController extends Controller
         //AQUI É O METODO DE ADIÇÃO
         if ($req->input('_token') != '' && $req->id == '') {
             $regras = [
-                'nome' => 'required|min:3max:40',
+                'nome' => 'required|min:3|max:40',
                 'site' => 'required',
                 'uf' => 'required|min:2|max:2',
                 'email' => 'email'
@@ -92,9 +98,9 @@ class FornecedorController extends Controller
     }
 
     public function excluir($id) {
-        Fornecedor::find($id)->delete();
-        //Fornecedor::find($id)->forceDelete();
-
+        $fornecedor = Fornecedor::find($id);
+        $fornecedor->produtos()->delete();
+        $fornecedor->delete();
         return redirect()->route('app.fornecedor');
     }
 }

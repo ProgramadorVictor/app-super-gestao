@@ -28,8 +28,9 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
 
     Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
     Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
-    Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
-    Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    Route::get('/fornecedor/adc', 'FornecedorController@adc')->name('app.fornecedor.adc');
+    //Rotas gets tem que ser diferentes de post, para não causar conflinto e adicionar via rota
+    Route::post('/fornecedor/adicionar-teste', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
     Route::get('/fornecedor/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedor.editar'); //Rota editar para editar os dados dos fornecedores.
     Route::get('/fornecedor/excluir/{id}/{msg?}', 'FornecedorController@excluir')->name('app.fornecedor.excluir');
     Route::get('/fornecedor/{msg?}', 'FornecedorController@index')->name('app.fornecedor'); //Essa rota não pode ficar em cima das outras outras de fornecedores o motivo eu não sei.

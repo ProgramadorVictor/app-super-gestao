@@ -56,9 +56,9 @@
                                 {{-- ISSO AQUI É MUITO IMPORTANTE PRESTA ATENÇÃO --}}
                                 {{-- O FORMULARIO COM ESSA NOMEAÇÃO PODEMOS TER VÁRIOS FORMULÁRIOS. --}}
                                 <form id="form_{{$produto->id}}" action="{{route('produto.destroy', ['produto' => $produto->id])}}" method="post">
+                                    @csrf
                                     @method('delete')
                                     {{-- VER O VERBO EM php artisan route:list , o método delete pertecen a route:resource e temos que mudar se não, fica bem dificil do laravel entender --}}
-                                    @csrf
                                     {{-- DIRECIONAMOS PARA A ROTA COM O VERBO DELETE --}}
                                     {{-- <button type="submit">Excluir</button> --}}
                                     <a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a>

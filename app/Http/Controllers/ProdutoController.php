@@ -23,10 +23,9 @@ class ProdutoController extends Controller
     public function index(Request $req) 
     {
         // $produtos = Produto::paginate(10); //Anteriormente usando com nomes padronizados
-        // $produtos = Item::paginate(10); 
+        // $produtos = Item::paginate(10); //Lazy Loading
         // $produtos = Item::with('itemDetalhe','rel2','rel3')->paginate(10); //Esatamos fazendo o carregamento ansioso, Eager Loading  //Cada parametro passado acima, com with, para o carregamento ansioso, representa um método. //Sendo possivel ser breaviamente carregao todos os relacionamentos.
-        $produtos = Item::with('itemDetalhe','fornecedor')->paginate(10);
-
+        $produtos = Item::with('itemDetalhe','fornecedor')->paginate(10); //Eager Loading
         //Paginate, para organizar melhor os dados de registro da página.
         //$key é o indice do foreach
 
@@ -40,7 +39,7 @@ class ProdutoController extends Controller
         //         $produtos[$key]['altura'] = $produtoDetalhe->altura;
         //     }
         // }
-        return view('app.produto.index', ['produtos' => $produtos, 'req' => $req->all()]);
+        return response()->view('app.produto.index', ['produtos' => $produtos, 'req' => $req->all()]);
     }
 
 
@@ -54,7 +53,7 @@ class ProdutoController extends Controller
         $unidades = Unidade::all(); //Chamando as unidades
         //RECUPERANDO TODAS AS UNIDADES.
         $fornecedores = Fornecedor::all();
-        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
+        return response()->view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -105,7 +104,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return view('app.produto.show', ['produto' => $produto]);
+        return response()->view('app.produto.show', ['produto' => $produto]);
     }
 
     /**
@@ -118,7 +117,7 @@ class ProdutoController extends Controller
     {
         $unidades = Unidade::all();
         $fornecedores = Fornecedor::all();
-        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
+        return response()->view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
         // return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
     } 
 

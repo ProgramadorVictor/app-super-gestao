@@ -24,7 +24,7 @@
             
             <form autocomplete="off" method="post" action="<?php echo e(route('app.fornecedor.adicionar')); ?>">
                 <input type="hidden" name="id" value="<?php echo e($fornecedor->id ?? ''); ?>">
-                <?php echo csrf_field(); ?>
+                
                 
                 
                 

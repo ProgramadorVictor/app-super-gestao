@@ -24,7 +24,7 @@ class AlterProdutosRelacionamentoFornecedores extends Migration
             $table->unsignedBigInteger('fornecedor_id')->default($fornecedor_id)->after('id');
             //Somente vai criar a coluna depois de criar a coluna id.
             //Querendo que a coluna fique a direta da coluna id, em produtos
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores'); //Foreign, constraint criada com sucesso
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores')->onDelete('cascade');; //Foreign, constraint criada com sucesso
         });
 
     }
@@ -35,9 +35,15 @@ class AlterProdutosRelacionamentoFornecedores extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('produtos');
-        Schema::enableForeignKeyConstraints();
+        
+        // Schema::disableForeignKeyConstraints();
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+            $table->dropForeign('produtos_fornecedor_id_foreign');
+            $table->dropColumn('fornecedor_id');
+        });
+        // Schema::dropIfExists('produtos');
+        // Schema::enableForeignKeyConstraints();
         // Schema::table('produtos',function (Blueprint $table){
         //Ou pode fazer dessa maneira
         //$table->dropForeign('produtos_forenecedor_id_foreign');

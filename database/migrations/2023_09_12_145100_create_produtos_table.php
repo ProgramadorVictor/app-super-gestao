@@ -21,6 +21,7 @@ class CreateProdutosTable extends Migration
             $table->float('preco_venda', 8, 2)->default(0.01);
             $table->integer('estoque_minimo')->default(1);
             $table->integer('estoque_maximo')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,7 +33,7 @@ class CreateProdutosTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('produtos');
+        Schema::dropIfExists('produtos');
         //DESATIVADO O DROP, POIS TEM MUITA FOREIGN, USAR O MÉTODO DOWN, EM OUTRAS MIGRATIONS
     }
 }

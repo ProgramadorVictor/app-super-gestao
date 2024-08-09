@@ -33,4 +33,4 @@
             <button type="submit" class="borda-preta"> <?php echo e(isset($produto_detalhe->id) ? 'Editar' : 'Cadastrar'); ?></button>
         
     </form>
-</div><?php /**PATH D:\Usuários\victor.andrade\Desktop\Victor\app_super_gestao\resources\views/app/produto_detalhe/_componentes/form_create_edit.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\Users\Victor\Desktop\.dev\app_super_gestao\resources\views/app/produto_detalhe/_componentes/form_create_edit.blade.php ENDPATH**/ ?>
