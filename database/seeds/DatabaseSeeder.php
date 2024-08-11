@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         //A seed tem que ser chamada aqui, para funcionar com o comando 'php artisan db:seed'
         $this->call(UnidadeSeeder::class);
         $this->call(ProdutoSeeder::class);
+        $this->call(ClientePedidoProdutoSeeder::class);
+        
 
         factory(User::class, 10)->create(); //Aqui é uma factory que podemos usar para alimentar o banco de dados.
     }

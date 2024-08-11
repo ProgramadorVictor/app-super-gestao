@@ -17,17 +17,17 @@ class UserSeeder extends Seeder
         $usuario = new User; //Instancia e usuario
         $usuario->name = "Padrão";
         $usuario->email = "padrao@gmail.com";
-        $usuario->password = "123";
+        $usuario->password = "1234";
         $usuario->save();
-        User::create([
-            'name' => 'Victor Oliveira Silva',
-            'email' => 'victoroliveirasilva@gmail.com',
-            'password' => '123',
-        ]);
-        DB::table('users')->insert([
-            'name' => 'Pedro Alvarez Cabral',
-            'email' => 'pedroalvarezcabral@gmail.com',
-            'password' => 'brazil',
-        ]);
+        // User::create([
+        //     'name' => 'Victor Oliveira Silva',
+        //     'email' => 'victoroliveirasilva@gmail.com',
+        //     'password' => '123',
+        // ]);
+        // DB::table('users')->insert([
+        //     'name' => 'Pedro Alvarez Cabral',
+        //     'email' => 'pedroalvarezcabral@gmail.com',
+        //     'password' => 'brazil',
+        // ]);
     }
 }

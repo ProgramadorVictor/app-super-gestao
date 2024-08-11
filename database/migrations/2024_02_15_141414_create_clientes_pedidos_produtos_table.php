@@ -20,17 +20,14 @@ class CreateClientesPedidosProdutosTable extends Migration
         });
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cliente_id');
+            $table->foreignId('cliente_id')->constrained('clientes');
             $table->timestamps();
-            $table->foreign('cliente_id')->references('id')->on('clientes');
         });
         Schema::create('pedido_produtos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pedido_id');
-            $table->unsignedBigInteger('produto_id');
+            $table->foreignId('pedido_id')->constrained('pedidos');
+            $table->foreignId('produto_id')->references('id')->on('produtos');
             $table->timestamps();
-            $table->foreign('pedido_id')->references('id')->on('pedidos');
-            $table->foreign('produto_id')->references('id')->on('produtos');
         });
     }
 

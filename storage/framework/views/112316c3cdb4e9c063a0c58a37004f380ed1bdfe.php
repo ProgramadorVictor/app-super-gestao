@@ -5,7 +5,8 @@
     <div class="menu">  
         <ul>
             <li><a href="<?php echo e(route('app.home')); ?>">Home</a></li>
-            <li><a href="<?php echo e(route('app.cliente')); ?>">Cliente</a></li>
+            <li><a href="<?php echo e(route('cliente.index')); ?>">Cliente</a></li>
+            <li><a href="<?php echo e(route('pedido.index')); ?>">Pedido</a></li>
             <li><a href="<?php echo e(route('app.fornecedor')); ?>">Fornecedor</a></li>
             <li><a href="<?php echo e(route('produto.index')); ?>">Produto</a></li>
             

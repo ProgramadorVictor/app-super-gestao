@@ -23,6 +23,6 @@ class SiteContatoSeeder extends Seeder
         ]);*/
         
 
-        factory(SiteContato::class, 100)->create(); //
+        factory(SiteContato::class, 10)->create(); //
     }
 }

@@ -30,7 +30,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($fornecedores as $fornecedor)
+                    {{-- Estava estudando fora da aula sobre o uso do @forelse --}}
+                    @forelse($fornecedores as $fornecedor) 
                         <tr>
                             <td>{{$fornecedor->nome}}</td>
                             <td>{{$fornecedor->site}}</td>
@@ -62,7 +63,9 @@
                                 </table>
                             </td>
                         </tr>
-                    @endforeach
+                        @empty
+                            {{"No momento não existe fornecedores, com a busca especificada."}}
+                    @endforelse
                 </tbody>
             </table>
             {{-- UTILIZAMOS O MÉTODO DE PAGINATE PARA FAZER A PAGINAÇÃO DA LISTA, AGORA TEMOS A PAGINAÇÃO E PODEMOS VER COM '$fornecedores->links()' --}}

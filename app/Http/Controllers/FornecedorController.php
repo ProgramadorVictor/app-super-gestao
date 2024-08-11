@@ -25,7 +25,6 @@ class FornecedorController extends Controller
     }
     public function adc(){
         $msg = '';
-        echo "a";
         return view('app.fornecedor.adicionar', ['msg' => $msg]);
     }
 

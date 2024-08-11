@@ -31,7 +31,7 @@
             <select name="unidade_id" id="">
                 <option>Selecione a unidade de medida</option>
                 <?php $__currentLoopData = $unidades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $unidade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <option value="<?php echo e($unidade->id); ?>" <?php echo e($produto->unidade_id ?? old('unidade_id') == $unidade->id ? 'selected' : ''); ?>><?php echo e($unidade->descricao); ?></option>
+                    <option value="<?php echo e($unidade->id); ?>" <?php echo e(($produto->unidade_id ?? old('unidade_id')) == $unidade->id ? 'selected' : ''); ?>><?php echo e($unidade->descricao); ?></option>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
             <?php echo e($errors->has('unidade_id') ? $errors->first('unidade_id') : ''); ?>

@@ -24,7 +24,7 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     //Encadaeamento de middlewares, escolhendo também a ordem, aqui passará por log.acesso primeiro e após passará pelo autenticacao.
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');  
-    Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
+    // Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
 
     Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
     Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
@@ -50,6 +50,11 @@ Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(
     //Ele automaticamente da a existência dessas rotas. Com os métodos. (Utilizar ao invés de criar várias rotas na mão)
     // Route::get('/produto', 'ProdutoController@index')->name('app.produto'); //Para atribuir nomes a rotas do tipo resource, o rota deve esta abaixo da resouce, com o nome.
     Route::resource('produto-detalhe','ProdutoDetalheController');
+    Route::resource('cliente','ClienteController');
+    Route::resource('pedido','PedidoController');
+    // Route::resource('pedido-produto','PedidoProdutoController');
+    Route::get('pedido-produto/create/{pedido}','PedidoProdutoController@create')->name('pedido-produto.create');
+    Route::post('pedido-produto/store/{pedido}','PedidoProdutoController@store')->name('pedido-produto.store');
 });
 
 Route::fallback(function() {
