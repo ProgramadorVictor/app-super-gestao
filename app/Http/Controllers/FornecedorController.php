@@ -97,9 +97,11 @@ class FornecedorController extends Controller
     }
 
     public function excluir($id) {
+
         $fornecedor = Fornecedor::find($id);
         $fornecedor->produtos()->delete();
         $fornecedor->delete();
+
         return redirect()->route('app.fornecedor');
     }
 }

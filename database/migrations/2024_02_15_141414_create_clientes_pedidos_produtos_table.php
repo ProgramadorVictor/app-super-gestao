@@ -23,7 +23,7 @@ class CreateClientesPedidosProdutosTable extends Migration
             $table->foreignId('cliente_id')->constrained('clientes');
             $table->timestamps();
         });
-        Schema::create('pedido_produtos', function (Blueprint $table) {
+        Schema::create('pedidos_produtos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pedido_id')->constrained('pedidos');
             $table->foreignId('produto_id')->references('id')->on('produtos');

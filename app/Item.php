@@ -21,6 +21,9 @@ class Item extends Model
     public function fornecedor(){
         return $this->belongsTo('App\Fornecedor','fornecedor_id','id'); //Um produto pertecen a  fornecedor.
     } //Relacionamento de 1 para N.
+    public function pedidos(){
+        return $this->belongsToMany("App\Pedido", "pedidos_produtos", "produto_id", "pedido_id");
+    } 
 }
 //OBS: Model 'Item' que mapeia a tabela 'produtos' tem '($this->hasOne)' que é um item detalhe que mapeia a tabela 'produtos_detalhes' e o relacionamento é em 'produto_detalhes' a foreign é a coluna produto_id
 //E encaminhamos a coluna id da tabela 'produtos' para estabelecermos um relacionamento em Item e ItemDetalhe.

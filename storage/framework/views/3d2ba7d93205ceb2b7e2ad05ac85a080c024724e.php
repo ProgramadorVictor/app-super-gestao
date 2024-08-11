@@ -9,6 +9,9 @@
         </select>
         <?php echo e($errors->has('produto_id') ? $errors->first('produto_id') : ''); ?>
 
+        <input type="number" placeholder="Quantidade" name="quantidade" id="" value="<?php echo e(old('quantidade')); ?>">
+        <?php echo e($errors->has('quantidade') ? $errors->first('quantidade') : ''); ?>
+
         <button type="submit" class="borda-preta"> <?php echo e(isset($pedido->id) ? 'Editar' : 'Cadastrar'); ?></button>
     </form>
 </div><?php /**PATH C:\Users\Victor\Desktop\.dev\app_super_gestao\resources\views/app/pedido-produto/_componentes/form_create.blade.php ENDPATH**/ ?>

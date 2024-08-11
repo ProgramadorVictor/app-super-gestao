@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $usuario = new User; //Instancia e usuario
         $usuario->name = "Padrão";
         $usuario->email = "padrao@gmail.com";
-        $usuario->password = "1234";
+        $usuario->password = "123";
         $usuario->save();
         // User::create([
         //     'name' => 'Victor Oliveira Silva',

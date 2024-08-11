@@ -8,6 +8,8 @@
             @endforeach
         </select>
         {{$errors->has('produto_id') ? $errors->first('produto_id') : '' }}
+        <input type="number" placeholder="Quantidade" name="quantidade" id="" value="{{old('quantidade')}}">
+        {{$errors->has('quantidade') ? $errors->first('quantidade') : '' }}
         <button type="submit" class="borda-preta"> {{isset($pedido->id) ? 'Editar' : 'Cadastrar'}}</button>
     </form>
 </div>

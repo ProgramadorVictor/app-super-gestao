@@ -68,6 +68,15 @@
                             
                             <td><a href="<?php echo e(route('produto.edit', ['produto' => $produto->id])); ?>">Editar</a></td>
                         </tr>
+                        <tr>
+                            <td colspan="12">
+                                <?php $__currentLoopData = $produto->pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pedido): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a href="<?php echo e(route('pedido-produto.create', ['pedido' => $pedido->id])); ?>">
+                                    Pedido: <?php echo e($pedido->id); ?>,
+                                </a>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </td>
+                        </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
             </table>

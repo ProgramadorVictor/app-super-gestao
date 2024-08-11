@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PedidoProduto extends Model
 {
-    protected $table ="pedido_produtos";
+    protected $table ="pedidos_produtos";
 
     public function pedido(){
         return $this->belongsTo('App\Pedido','pedido_id','id');

@@ -27,6 +27,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome do produto</th>
+                        <th>Data de inclusão do produto no pedido: </th>
+                        <th>Exclusão</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +36,14 @@
                         <tr>
                             <td><?php echo e($produto->id); ?></td>
                             <td><?php echo e($produto->nome); ?></td>
+                            <td><?php echo e($produto->pivot->created_at ? $produto->pivot->created_at->format('H/m/Y H:i:s') : ''); ?></td>
+                            <th>
+                                <form id="form_<?php echo e($produto->pivot->id); ?>" method="post" action="<?php echo e(route('pedido-produto.destroy', ['pedidoProduto' => $produto->pivot->id])); ?>">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field("delete"); ?>
+                                    <a href="#" onclick="document.getElementById('form_<?php echo e($produto->pivot->id); ?>').submit()">Excluir</a>
+                                </form>
+                            </th>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
